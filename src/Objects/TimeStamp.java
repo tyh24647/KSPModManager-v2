@@ -9,12 +9,6 @@ import java.util.Date;
  */
 public class TimeStamp {
     private static final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy.MM.dd_hh:mm:ss_a_zzz");
-    private String currentUser;
-
-    public TimeStamp() {
-
-    }
-
     public static String currentDateTime() {
         return dateFormat.format(new Date());
     }

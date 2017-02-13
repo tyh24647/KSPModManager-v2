@@ -21,11 +21,15 @@ public class KSPMMStringFormatter extends StringUtils {
             formattedStr = formatStrWithSpaces(formattedStr, false);
         }
 
-        Log.DEBUG(TAG, "String successfully formatted: \"" + str + "\" --> \"" + formattedStr + "\"");
+        StringBuilder sb = new StringBuilder();
+        for (char c : formattedStr.toCharArray()) {
+            if (c != '+' && c != '.' && c != '/' && c != '\'') {
+                sb.append(c);
+            }
+        }
 
-        /*
-        TODO: Other conditions
-         */
+        formattedStr = sb.toString();
+        Log.DEBUG(TAG, "String successfully formatted: \"" + str + "\" --> \"" + formattedStr + "\"");
 
         return formattedStr;
 

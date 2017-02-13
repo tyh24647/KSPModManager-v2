@@ -90,8 +90,30 @@ public class KSPMMStringEncrypter extends AESEncryption {
         return encrypted;
     }
 
+    /**
+     * <p>
+     *     Encrypts the specified <code>String</code> using a generated secret key, which
+     *     is created based on the specific login time, the username, the Sha1 hash value,
+     *     Base64 encoding, and AES encryption.
+     * </p>
+     * <u>
+     *     <b>Note:</b>
+     *     &nbsp;
+     *     the parameters for the encryption must have the following requirements:
+     * </u>
+     * <ul>
+     *     <li>After being hashed (Sha1) and encoded (Base64), the secret key cannot be more than 16 bits in size</li>
+     *     <li>After being encoded, the <code>String</code> cannot include escape characters</li>
+     *     <li>The encryption cannot be performed on a null <code>String</code> value</li>
+     * </ul>
+     *
+     * @param str           The string to be encoded
+     * @param secretKey     The secret key by which the encryption is performed
+     * @param cipher        The cipher object for encryption (default is "AES")
+     * @return              The encrypted bytes of data
+     */
     public byte[] encrypt(String str, Key secretKey, Cipher cipher) {
-        if (! Validator.isValidStr(str) || secretKey == null || cipher == null) {
+        if (!Validator.isValidStr(str) || secretKey == null || cipher == null) {
             return null;
         }
 
@@ -135,36 +157,3 @@ public class KSPMMStringEncrypter extends AESEncryption {
         return super.toString();
     }
 }
-/*
-            String text = "Hello World";
-            String key = "Bar12345Bar12345"; // 128 bit key
-            // Create key and cipher
-            Key aesKey = new SecretKeySpec(key.getBytes(), "AES");
-            Cipher cipher = Cipher.getInstance("AES");
-            // encrypt the text
-            cipher.init(Cipher.ENCRYPT_MODE, aesKey);
-            byte[] encrypted = cipher.doFinal(text.getBytes());
-
-            StringBuilder sb = new StringBuilder();
-            for (byte b: encrypted) {
-                sb.append((char)b);
-            }
-
-            // the encrypted String
-            String enc = sb.toString();
-            System.out.println("encrypted:" + enc);
-
-            // now convert the string to byte array
-            // for decryption
-            byte[] bb = new byte[enc.length()];
-            for (int i=0; i<enc.length(); i++) {
-                bb[i] = (byte) enc.charAt(i);
-            }
-
-            // decrypt the text
-            cipher.init(Cipher.DECRYPT_MODE, aesKey);
-            String decrypted = new String(cipher.doFinal(bb));
-            System.err.println("decrypted:" + decrypted);
-
-        }
- */

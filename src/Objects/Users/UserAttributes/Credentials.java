@@ -44,6 +44,7 @@ public class Credentials extends User implements ICredentials {
     public Credentials(@Nonnull String username, @Nonnull String password) {
         super.setUsername(username);
         super.setPassword(password);
+        validateUsernameAndPassword();
         super.setCredentials(this);
         encryptUserData();
     }
@@ -53,9 +54,29 @@ public class Credentials extends User implements ICredentials {
         aesKey = stringEncrypter.getEncryptionKey();
         encryptedUsernameData = stringEncrypter.encrypt(username, aesKey, stringEncrypter.getCurrentCipher());
         encryptedPasswordData = stringEncrypter.encrypt(password, aesKey, stringEncrypter.getCurrentCipher());
-        encryptedPassword = StringUtils.scramble(StringUtils.scramble (
-                KSPMMStringFormatter.format(Base64.encode(new String(encryptedPasswordData, StandardCharsets.UTF_8).getBytes())))
-        );
+        encryptedUsername = generateEncryptedUsername(encryptedUsernameData);
+        encryptedPassword = generateEncryptedPassword(encryptedPasswordData);
+    }
+
+    /**
+     * <p>Generates the <code>String</code>value of a <code>Base64</code> hash value</p>
+     *
+     * @param encryptedUsernameData The username data to format
+     * @return                      The <code>String</code> value of the decoded data
+     * @see                         KSPMMStringFormatter for usage
+     */
+    @Nonnull
+    private String generateEncryptedUsername(@Nonnull byte[] encryptedUsernameData) {
+        return StringUtils.scramble(KSPMMStringFormatter.format(
+                Base64.encode(new String(encryptedUsernameData, StandardCharsets.UTF_8).getBytes())
+        ));
+    }
+
+    @Nonnull
+    private String generateEncryptedPassword(@Nonnull byte[] encryptedPasswordData) {
+        return StringUtils.scramble(KSPMMStringFormatter.format(
+                Base64.encode(new String(encryptedPasswordData, StandardCharsets.UTF_8).getBytes())
+        ));
     }
 
     private void validateUsernameAndPassword() {
@@ -102,47 +123,4 @@ public class Credentials extends User implements ICredentials {
     public byte[] getEncryptedPasswordData() {
         return encryptedPasswordData;
     }
-
-    /*
-    @Override
-    public String toString() {
-        prefsArr = new ArrayList<>();
-        if (stringEncrypter != null) {
-            prefsArr.add(new PrefsElement(ENCRYPTION_TITLE, stringEncrypter));
-        }
-        if (aesKey != null) {
-            prefsArr.add(new PrefsElement(AES_KEY_TITLE, aesKey));
-        }
-        if (encryptedUsername != null) {
-            prefsArr.add(new PrefsElement(ENCRYPTED_USERNAME_TITLE, encryptedUsername));
-        }
-        if (encryptedPassword != null) {
-            prefsArr.add(new PrefsElement(ENCRYPTED_PASSWORD_TITLE, encryptedPassword));
-        }
-        if (encryptedCredentials != null) {
-            prefsArr.add(new PrefsElement(ENCRYPTED_CREDENTIALS_TITLE, encryptedCredentials));
-        }
-        if (encryptedUsernameData != null) {
-            prefsArr.add(new PrefsElement(ENCRYPTED_USERNAME_DATA_TITLE, encryptedUsernameData));
-        }
-        if (encryptedPasswordData != null) {
-            prefsArr.add(new PrefsElement(ENCRYPTED_PASSWORD_DATA_TITLE, encryptedPasswordData));
-        }
-        if (encryptedCredentialsData != null) {
-            prefsArr.add(new PrefsElement(ENCRYPTED_CREDENTIALS_DATA_TITLE, encryptedCredentialsData));
-        }
-
-        StringBuilder sb = new StringBuilder(prefsArr.size());
-        prefsArr.forEach(sb::append);
-        return super.toString() + sb.toString();
-    }
-    */
 }
-
-/*
- private static AESEncryption encryption;
-    private Key aesKey;
-    private User associatedUser;
-    private String username, password, encryptedUsername, encryptedPassword, encryptedCredentials;
-    private Data encryptedUsernameData, encryptedPasswordData, encryptedCredentialsData;
- */
