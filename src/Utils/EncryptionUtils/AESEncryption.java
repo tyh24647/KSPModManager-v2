@@ -173,82 +173,10 @@ public class AESEncryption {
 
         return this.currentCipher;
     }
-    //endregion
 
     public Cipher getCurrentCipher() {
         return cipher == null ? this.currentCipher == null ? setCurrentCipher(null) : this.currentCipher : cipher;
     }
-
-    /*
-    @Override
-    public String toString() {
-        ArrayList<PrefsElement> elements = new ArrayList<>();
-
-        if (user != null) {
-            if (Validator.isValidStr(user.toString())) {
-                elements.add(new PrefsElement(
-                        USER_TITLE, user.toString()
-                ));
-            }
-            if (Validator.isValidStr(encryptionKey.toString())) {
-                elements.add(new PrefsElement(
-                        AES_KEY_TITLE, encryptionKey.toString()
-                ));
-            }
-            if (Validator.isValidStr(currentCipher.toString())) {
-                elements.add(new PrefsElement(
-                        CURRENT_CIPHER_TITLE, currentCipher.toString()
-                ));
-            }
-        }
-
-        StringBuilder sb;
-        if (elements.size() > 0) {
-            sb = new StringBuilder(elements.size());
-            for (PrefsElement element : elements) {
-                String tmp = element.toString().concat("\n");
-                sb.append(tmp);
-            }
-        } else {
-            sb = new StringBuilder();
-            sb.append(EMPTY);
-        }
-
-        return super.toString() + sb.toString();
-    }
-    */
+    //endregion
 }
-/*
-            String text = "Hello World";
-            String key = "Bar12345Bar12345"; // 128 bit key
-            // Create key and cipher
-            Key aesKey = new SecretKeySpec(key.getBytes(), "AES");
-            Cipher cipher = Cipher.getInstance("AES");
-            // encrypt the text
-            cipher.init(Cipher.ENCRYPT_MODE, aesKey);
-            byte[] encrypted = cipher.doFinal(text.getBytes());
-
-            StringBuilder sb = new StringBuilder();
-            for (byte b: encrypted) {
-                sb.append((char)b);
-            }
-
-            // the encrypted String
-            String enc = sb.toString();
-            System.out.println("encrypted:" + enc);
-
-            // now convert the string to byte array
-            // for decryption
-            byte[] bb = new byte[enc.length()];
-            for (int i=0; i<enc.length(); i++) {
-                bb[i] = (byte) enc.charAt(i);
-            }
-
-            // decrypt the text
-            cipher.init(Cipher.DECRYPT_MODE, aesKey);
-            String decrypted = new String(cipher.doFinal(bb));
-            System.err.println("decrypted:" + decrypted);
-
-        }
-        */
 
