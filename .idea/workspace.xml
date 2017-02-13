@@ -5,43 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9d94d1ef-152f-4458-9551-595e1187b472" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../ClipThru-Test/.idea/vcs.xml" />
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../KSPMM/.idea/vcs.xml" />
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../KSPMM/src/Utils/FileUtilities/FileManager.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/dictionaries/tyhostager.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/commons_codec_1_10.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/commons_io_2_5.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/commons_net_3_5.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/jaxb_core.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Objects/DataManagers/KSPMMCloudDataManager.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Objects/Users/UserAttributes/ICredentials.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Utils/EncryptionUtils/AESEncryption.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Utils/EncryptionUtils/StringEncryption/KSPMMStringDecryptor.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Utils/EncryptionUtils/StringEncryption/KSPMMStringEncrypter.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Utils/EncryptionUtils/UserDataEncryption/UserDataEncrypter.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Utils/StringUtils/KSPMMStringFormatter.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Utils/StringUtils/StringUtils.java" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Look_and_Feel.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Objects/Users/UserAttributes/CredentialsImpl.java" afterPath="" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/Utils/XML/XMLUtils.java" afterPath="$PROJECT_DIR$/src/Utils/XMLUtils/XMLUtils.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/vcs.xml" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/KSPModManager-v2.iml" afterPath="$PROJECT_DIR$/KSPModManager-v2.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Constants/Defaults.java" afterPath="$PROJECT_DIR$/src/Constants/Defaults.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Constants/StrConstants.java" afterPath="$PROJECT_DIR$/src/Constants/StrConstants.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/KSPMMDriver.java" afterPath="$PROJECT_DIR$/src/KSPMMDriver.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Models/KSPMMAbstractTableModel.java" afterPath="$PROJECT_DIR$/src/Models/KSPMMAbstractTableModel.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Models/KSPModManager.java" afterPath="$PROJECT_DIR$/src/Models/KSPModManager.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Objects/Data/PrefsElements/Child/Elements/PrefsKey.java" afterPath="$PROJECT_DIR$/src/Objects/Data/PrefsElements/Child/Elements/PrefsKey.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Objects/Data/PrefsElements/Child/Elements/PrefsValue.java" afterPath="$PROJECT_DIR$/src/Objects/Data/PrefsElements/Child/Elements/PrefsValue.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Objects/Data/PrefsElements/Child/PrefsElement.java" afterPath="$PROJECT_DIR$/src/Objects/Data/PrefsElements/Child/PrefsElement.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Objects/Data/PrefsElements/PrefsElements.java" afterPath="$PROJECT_DIR$/src/Objects/Data/PrefsElements/PrefsElements.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Objects/Files/XMLFile.java" afterPath="$PROJECT_DIR$/src/Objects/Files/XMLFile.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Objects/TimeStamp.java" afterPath="$PROJECT_DIR$/src/Objects/TimeStamp.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Objects/Users/User.java" afterPath="$PROJECT_DIR$/src/Objects/Users/User.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Objects/Users/UserAttributes/Credentials.java" afterPath="$PROJECT_DIR$/src/Objects/Users/UserAttributes/Credentials.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Utils/Log.java" afterPath="$PROJECT_DIR$/src/Utils/Log.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Utils/Validator.java" afterPath="$PROJECT_DIR$/src/Utils/Validator.java" />
     </list>
     <ignored path="KSPModManager-v2.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -83,8 +49,8 @@
       <file leaf-file-name="KSPMMDriver.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/KSPMMDriver.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="193">
-              <caret line="41" column="0" selection-start-line="41" selection-start-column="0" selection-end-line="41" selection-end-column="0" />
+            <state relative-caret-position="780">
+              <caret line="52" column="39" selection-start-line="52" selection-start-column="39" selection-end-line="52" selection-end-column="39" />
               <folding />
             </state>
           </provider>
@@ -1164,7 +1130,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -1178,7 +1144,7 @@
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.13333334" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.13333334" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -1203,6 +1169,10 @@
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Add: Encryption, formatters, constants, XML utilities" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add: Encryption, formatters, constants, XML utilities" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1279,6 +1249,18 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="292">
           <caret line="72" column="5" selection-start-line="72" selection-start-column="5" selection-end-line="72" selection-end-column="5" />
+          <folding>
+            <element signature="e#1299#1300#0" expanded="true" />
+            <element signature="e#1326#1327#0" expanded="true" />
+            <element signature="e#1365#1366#0" expanded="true" />
+            <element signature="e#1392#1393#0" expanded="true" />
+            <element signature="e#1480#1481#0" expanded="true" />
+            <element signature="e#1508#1509#0" expanded="true" />
+            <element signature="e#1555#1556#0" expanded="true" />
+            <element signature="e#1583#1584#0" expanded="true" />
+            <element signature="e#1621#1622#0" expanded="true" />
+            <element signature="e#1649#1650#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1286,6 +1268,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="210">
           <caret line="14" column="11" selection-start-line="14" selection-start-column="11" selection-end-line="14" selection-end-column="11" />
+          <folding>
+            <marker date="1486950889000" expanded="true" signature="106:337" ph="/**...*/" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1323,6 +1308,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="315">
           <caret line="21" column="5" selection-start-line="21" selection-start-column="5" selection-end-line="21" selection-end-column="5" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1358,6 +1344,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="105">
           <caret line="7" column="4" selection-start-line="7" selection-start-column="4" selection-end-line="7" selection-end-column="4" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1366,6 +1353,10 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="217">
           <caret line="20" column="15" selection-start-line="20" selection-start-column="15" selection-end-line="20" selection-end-column="15" />
+          <folding>
+            <element signature="e#444#445#0" expanded="true" />
+            <element signature="e#497#498#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1385,6 +1376,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="90">
           <caret line="6" column="34" selection-start-line="6" selection-start-column="34" selection-end-line="6" selection-end-column="34" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1392,6 +1384,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="195">
           <caret line="52" column="12" selection-start-line="52" selection-start-column="12" selection-end-line="52" selection-end-column="12" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1400,6 +1393,16 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="105">
           <caret line="7" column="3" selection-start-line="7" selection-start-column="3" selection-end-line="7" selection-end-column="3" />
+          <folding>
+            <element signature="e#230#231#0" expanded="true" />
+            <element signature="e#257#258#0" expanded="true" />
+            <element signature="e#304#305#0" expanded="true" />
+            <element signature="e#334#335#0" expanded="true" />
+            <element signature="e#377#378#0" expanded="true" />
+            <element signature="e#403#404#0" expanded="true" />
+            <element signature="e#435#436#0" expanded="true" />
+            <element signature="e#461#462#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1407,6 +1410,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="390">
           <caret line="25" column="0" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1414,6 +1418,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="105">
           <caret line="7" column="4" selection-start-line="7" selection-start-column="4" selection-end-line="7" selection-end-column="4" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1421,6 +1426,10 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="193">
           <caret line="16" column="8" selection-start-line="16" selection-start-column="8" selection-end-line="16" selection-end-column="8" />
+          <folding>
+            <element signature="e#687#688#0" expanded="true" />
+            <element signature="e#715#716#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1436,6 +1445,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="150">
           <caret line="10" column="57" selection-start-line="10" selection-start-column="57" selection-end-line="10" selection-end-column="57" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1465,6 +1475,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="388">
           <caret line="53" column="28" selection-start-line="53" selection-start-column="28" selection-end-line="53" selection-end-column="28" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1479,6 +1490,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="60">
           <caret line="4" column="0" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1486,6 +1498,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="390">
           <caret line="26" column="38" selection-start-line="26" selection-start-column="38" selection-end-line="26" selection-end-column="38" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1538,6 +1551,12 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="194">
           <caret line="27" column="17" selection-start-line="27" selection-start-column="17" selection-end-line="27" selection-end-column="17" />
+          <folding>
+            <element signature="e#1241#1242#0" expanded="true" />
+            <element signature="e#1268#1269#0" expanded="true" />
+            <element signature="e#1465#1466#0" expanded="true" />
+            <element signature="e#1492#1493#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1593,8 +1612,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/KSPMMDriver.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="193">
-          <caret line="41" column="0" selection-start-line="41" selection-start-column="0" selection-end-line="41" selection-end-column="0" />
+        <state relative-caret-position="780">
+          <caret line="52" column="39" selection-start-line="52" selection-start-column="39" selection-end-line="52" selection-end-column="39" />
           <folding />
         </state>
       </provider>
