@@ -4,10 +4,13 @@ package Constants;
  * @author Tyler Hostager
  * @version 2/12/17
  */
-public class StrConstants {
+public final class StrConstants {
     public static final String
             DEFAULT_USERNAME = "default",
             DEFAULT_PASSWORD = "12345",
+            BOTTOM_LABEL_TXT = "© Tyler Hostager, 2017 - All Rights Reserved",
+            TITLE_LABEL_TXT = "KERBAL SPACE PROGRAM - MODS MANAGER",
+            TITLE = "KSP Mods Manager",
             AES = "AES",
             AES_KEY_TITLE = "AESKey",
             CONSOLE_COLOR_FLAG = "\033[",
@@ -33,14 +36,10 @@ public class StrConstants {
             ENCRYPTED_PASSWORD_DATA_TITLE = "encryptedPasswordData",
             ENCRYPTED_CREDENTIALS_DATA_TITLE = "encryptedCredentialsData",
             CURRENT_CIPHER_TITLE = "currentCipher",
-
-    // TODO put these in separate tags class
             DEBUG_TAG = "DEBUG: ",
             ERROR_TAG = "ERROR: ",
             XML_WRITER_TAG = "XMLWRITER: ",
             XML_READER_TAG = "XMLREADER: ",
-    // TODO put these in separate tags class
-
             EMPTY = "",
             SPACE = " ",
             BACKSLASH = "\"",

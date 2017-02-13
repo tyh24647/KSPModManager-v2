@@ -14,7 +14,11 @@ public class KSPMMStringFormatter extends StringUtils {
     public static String format(String str) {
         Log.DEBUG(TAG, "formatting \"" + str + "\"");
         String formattedStr = str;
-        if (formattedStr.contains(BACKSLASH) || formattedStr.contains("\b") || formattedStr.contains("\f") || formattedStr.contains("\n") || formattedStr.contains(("\t"))) {
+        if (formattedStr.contains(BACKSLASH)
+                || formattedStr.contains("\b")
+                || formattedStr.contains("\f")
+                || formattedStr.contains("\n")
+                || formattedStr.contains(("\t"))) {
             formattedStr = formattedStr.replaceAll(BACKSLASH, FORMATTED_SPACE);
         }
         if (str.contains(SPACE)) {

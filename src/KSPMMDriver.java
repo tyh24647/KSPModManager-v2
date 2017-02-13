@@ -1,10 +1,15 @@
 import Constants.StrConstants;
+import Controllers.MainViewController;
 import Models.KSPModManager;
 import Objects.Users.User;
 import Objects.Users.UserAttributes.Credentials;
 import Utils.Log;
+import UserInterface.KSPMMMainView;
 
 import javax.swing.*;
+
+import static Constants.StrConstants.CONSOLE_COLOR_RESET;
+import static Constants.StrConstants.CONSOLE_YELLOW;
 
 /**
  * The main driver for the application
@@ -21,38 +26,25 @@ public class KSPMMDriver {
     public static void main(String[] args) {
         Log.DEBUG("Generating user object...");
         User user = new Credentials(StrConstants.DEFAULT_USERNAME, StrConstants.DEFAULT_PASSWORD);
-        Log.DEBUG("User generated successfully");
-        Log.DEBUG("Initializing model...");
-        try {
-            Thread.sleep(500);
-        } catch (Exception e) {
-            Log.ERROR(e, e.getMessage());
-        }
-        Log.DEBUG("Model successfully generated");
-        Log.DEBUG("Adding user to model...");
+        Log.DEBUG(CONSOLE_YELLOW + "User generated successfully");
+        Log.DEBUG(CONSOLE_COLOR_RESET + "Creating model for user...");
         KSPModManager model = new KSPModManager(user);
-        Log.DEBUG("User added successfully");
-        //model.setUser(user);
-
-
-        /*
-        TODO: Add more functionality here
-         */
+        Log.DEBUG("Model created successfully");
+        Log.DEBUG("Generating UI mainframe");
+        KSPMMMainView view = new KSPMMMainView();
+        Log.DEBUG("UI generated successfully");
         Log.DEBUG("Executing program...");
-        executeProgram();
+        executeProgram(model, view);
         Log.DEBUG("Program launched");
     }
 
     /**
      * <p>Starts the program execution</p>
      */
-    private static void executeProgram() {
+    private static void executeProgram(KSPModManager model, KSPMMMainView gui) {
         SwingUtilities.invokeLater(() -> {
-            /*
-            Log.DEBUG("Generating user interface...");
-            view = new KSPMMMainView();
-            Log.DEBUG("UI generated successfully");
-            */
+            MainViewController controller = new MainViewController(model, gui);
+            controller.initUserInterface();
         });
     }
 

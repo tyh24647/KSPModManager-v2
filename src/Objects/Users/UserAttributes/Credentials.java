@@ -26,26 +26,22 @@ public class Credentials extends User implements ICredentials {
      */
     public Credentials() {
         super();
-        // TODO: TEST TEST TEST TEST TEST
-        setUsername(StrConstants.DEFAULT_USERNAME);
-        setPassword(StrConstants.DEFAULT_PASSWORD);
-        // TODO: TEST TEST TEST TEST TEST
-
-        encryptUserData();
+        setUserLoginInfo(StrConstants.DEFAULT_USERNAME, StrConstants.DEFAULT_PASSWORD);
     }
 
     public Credentials(User user) {
         super();
-        setUsername(user.getUsername());
-        setPassword(user.getPassword());
-        encryptUserData();
+        setUserLoginInfo(user.getUsername(), user.getPassword());
     }
 
     public Credentials(@Nonnull String username, @Nonnull String password) {
-        super.setUsername(username);
-        super.setPassword(password);
-        validateUsernameAndPassword();
-        super.setCredentials(this);
+        setUserLoginInfo(username, password);
+    }
+
+    private void setUserLoginInfo(@Nonnull String uName, @Nonnull String pWord) {
+        setUsername(uName);
+        setPassword(pWord);
+        setCredentials(this);
         encryptUserData();
     }
 

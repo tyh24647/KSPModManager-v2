@@ -35,7 +35,7 @@ public class StringUtils {
 
         Random r = str.toCharArray().length != 0 ? new Random(generateRandomLong(str.toCharArray().length)) : new Random();
         Log.DEBUG(TAG, "Generating new random '" + r.toString() + "' for scramble");
-        String tmp = StrConstants.EMPTY;
+        String tmp;
 
         char[] strChars = str.toCharArray();
         for (int i = 0; i < strChars.length - 1; i++) {
@@ -60,10 +60,11 @@ public class StringUtils {
      * @see             Utils.EncryptionUtils.AESEncryption for usage
      */
     private static Long generateRandomLong(int strlen) {
-        Random r = new Random(128), x = new Random(r.nextLong() + strlen),
-                z = new Random(((r.nextLong() * (((r.nextLong() + strlen) / (strlen / 2))
-                                / ((r.nextInt() + x.nextInt()) / x.nextInt()))) + ((r.nextLong() + strlen)
-                                / strlen) + (strlen * (strlen + x.nextLong() / 2))));
+        Random r = new Random(128),
+                x = new Random(r.nextLong() + strlen),
+                z = new Random(r.nextLong() * (((r.nextLong() + strlen) / (strlen / 2))
+                                / ((r.nextLong() + strlen) == 0 ? strlen : r.nextLong() + strlen)
+                                / strlen) + (strlen * (strlen + x.nextLong() / 2)));
         return new Random(z.nextLong()).nextLong();
     }
 

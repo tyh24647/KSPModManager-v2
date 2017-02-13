@@ -4,6 +4,8 @@ import Constants.Defaults;
 import Constants.StrConstants;
 import Objects.Users.User;
 
+import java.io.FileNotFoundException;
+
 /**
  * @author Tyler Hostager
  * @version 2/12/17
@@ -11,6 +13,7 @@ import Objects.Users.User;
 public class KSPModManager {
     private User user;
     private Object[][] data;
+    private KSPMMTableModel tableModel;
 
     /**
      * Default constructor
@@ -25,6 +28,18 @@ public class KSPModManager {
 
     public KSPModManager(String username, String password) {
 
+    }
+
+    public void saveData() throws FileNotFoundException {
+
+    }
+
+    public void setTableModel(KSPMMTableModel tableModel) {
+        this.tableModel = tableModel;
+    }
+
+    public KSPMMTableModel getTableModel() {
+        return tableModel;
     }
 
     public void setUser(User user) {
