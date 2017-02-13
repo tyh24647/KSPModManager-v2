@@ -49,7 +49,11 @@ abstract class KSPMMAbstractTableModel extends AbstractTableModel {
     private AbstractQueue<Object[][]> generateDataQueue() {
         AbstractQueue<Object[][]> tmp = null;
 
+        /*
+        TODO
+         */
 
+        return tmp;
     }
 
     //region ABSTRACT INTERFACE METHODS TO BE OVERRIDDEN BY CHILD CLASSES

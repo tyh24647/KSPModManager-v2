@@ -1,6 +1,5 @@
-package Utils.XML;
+package Utils.XMLUtils;
 
-import Constants.Defaults;
 import Exceptions.XMLExceptions.XMLDocNotFoundException;
 import Utils.Log;
 import Utils.Validator;
@@ -8,19 +7,18 @@ import org.checkerframework.checker.nullness.qual.NonNull;
 
 import java.io.File;
 
-import static Constants.StrConstants.DEFAULT_APP_DATA_DIR_NAME;
-import static Constants.StrConstants.DEFAULT_USER_DATA_DIR_NAME;
+import static Constants.Defaults.DEBUG;
+import static Constants.StrConstants.*;
 
 /**
  * @author Tyler Hostager
  * @version 2/12/17
  */
 public class XMLUtils {
-
-
+    private static final String TAG = "XMLUtils: ";
 
     public static boolean xmlDocExistsAtPath(String filePath, boolean isUserData) {
-        if (! Validator.isValidString(filePath)) {
+        if (! Validator.isValidStr(filePath)) {
             return false;
         }
 
@@ -28,7 +26,7 @@ public class XMLUtils {
         try {
             tmp = createFileAtPath(filePath);
         } catch (XMLDocNotFoundException e) {
-            if (Defaults.DEBUG_MODE) {
+            if (DEBUG) {
                 Log.ERROR(e.getMessage());
             }
 
@@ -40,6 +38,28 @@ public class XMLUtils {
         return tmp.exists();
     }
 
+    public static boolean writeToXMLFile(String title, Object value) {
+        boolean success;
+
+        Log.DEBUG(XML_WRITER_TAG, "Writing '" + value.toString() + "' to XML document with element name '" + title + "'");
+
+        if (DEBUG) {
+            success = false;
+        } else {
+            success = true;
+        }
+        /*
+        TODO
+         */
+
+        if (!success) {
+            Log.ERROR("Unable to write to document -- File not found");
+            Log.DEBUG(TAG, "Skipping procedure");
+        }
+
+        return success;
+    }
+
     private static File createFileAtPath(@NonNull String filePath) throws XMLDocNotFoundException {
         File tmp = new File(filePath);
 
@@ -47,6 +67,7 @@ public class XMLUtils {
 
         return tmp;
     }
+
 
 
 }

@@ -5,4 +5,5 @@ package Objects.Data.PrefsElements;
  * @version 2/12/17
  */
 public class PrefsElements {
+
 }

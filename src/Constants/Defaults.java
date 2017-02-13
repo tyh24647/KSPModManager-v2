@@ -6,7 +6,6 @@ import javax.annotation.Nonnull;
 import java.io.File;
 import java.util.HashMap;
 import java.util.List;
-import java.util.StringJoiner;
 
 /**
  * User Defaults
@@ -21,26 +20,32 @@ public final class Defaults {
 
     public static final String
             DEFAULT_USERNAME = "default",
-            PASSWORD = "default";
+            DEFAULT_PASSWORD = "default";
 
     public static final boolean
             IS_ADMIN = true,
-            DEBUG_MODE = false;
+            REQUIRE_AUTH = false,
+            DEBUG = true;
+
     //endregion
 
-    public HashMap<PrefsKey, Object> defaultSettings;
+
+
+    //public HashMap<PrefsKey, Object> defaultSettings;
 
     /**
      * <p>Constructs a singleton instance of an object specifying the default values for user preferences</p>
      */
     public Defaults() {
+        /*
         setDefaultSettings(this.defaultSettings == null ? initDefaultSettings() : this.defaultSettings);
+        */
     }
 
     private HashMap<String, Object> initDefaultSettings() {
         HashMap<String, Object> tmp = new HashMap<>();
 
-        for (String keyName :)
+        //for (String keyName :)
 
 
         //defaultSettings.put(Prefs.DEFAULT_USERNAME.getKeyName(), );
@@ -48,15 +53,15 @@ public final class Defaults {
     }
 
     public Object getValueForKey(String key) {
-        if ()
+        return null;
     }
 
     private void setDefaultSettings(@Nonnull HashMap<String, Object> defaultSettings) {
-        this.defaultSettings = defaultSettings;
+        //this.defaultSettings = defaultSettings;
     }
 
     public List<String> getDefaultSettingsKeys() {
-
+        return null;
     }
 
     private static String getUserDirectoryFilePathStr() {
@@ -76,15 +81,15 @@ public final class Defaults {
                         rVal = tmp.getAbsolutePath();
 
                         validationLoop:
-                        if (! Validator.isValidString(rVal)) {
+                        if (! Validator.isValidStr(rVal)) {
                             rVal = tmp.getPath();
-                            if (! Validator.isValidString(rVal)) {
+                            if (! Validator.isValidStr(rVal)) {
                                 rVal = tmp.getParent();
-                                if (! Validator.isValidString(rVal)) {
+                                if (! Validator.isValidStr(rVal)) {
                                     rVal = tmp.getName();
                                 }
 
-                                if (Validator.isValidString(rVal)) {
+                                if (Validator.isValidStr(rVal)) {
                                     rVal = StrConstants.EMPTY;
                                     break validationLoop;
                                 }

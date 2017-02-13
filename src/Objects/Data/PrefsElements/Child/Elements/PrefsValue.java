@@ -19,7 +19,7 @@ public class PrefsValue {
      */
     public PrefsValue(@Nonnull Object value) {
         if (value.getClass().equals(String.class)) {
-            if (!Validator.isValidString(value.toString())) {
+            if (!Validator.isValidStr(value.toString())) {
                 value = StrConstants.EMPTY;
             }
         }

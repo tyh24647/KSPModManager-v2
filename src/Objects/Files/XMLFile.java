@@ -8,8 +8,8 @@ public class XMLFile {
 
     /**
      * <p>
-     *     Creates an instance of an XML document using the <code>XMLFileManager</code> class, allowing for
-     *     reading and writing to the XML preferences file.
+     *     Creates an instance of an XMLUtils document using the <code>XMLFileManager</code> class, allowing for
+     *     reading and writing to the XMLUtils preferences file.
      * </p>
      *
      * @see
