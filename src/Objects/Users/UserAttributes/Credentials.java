@@ -3,9 +3,11 @@ package Objects.Users.UserAttributes;
 import Constants.StrConstants;
 import Objects.Users.User;
 import Utils.EncryptionUtils.StringEncryption.KSPMMStringEncrypter;
+import Utils.StringUtils.KSPMMStringFormatter;
+import Utils.StringUtils.StringUtils;
+import com.sun.org.apache.xerces.internal.impl.dv.util.Base64;
 
 import javax.annotation.Nonnull;
-
 import java.nio.charset.StandardCharsets;
 
 import static Constants.StrConstants.DEFAULT_USERNAME;
@@ -43,7 +45,6 @@ public class Credentials extends User implements ICredentials {
         super.setUsername(username);
         super.setPassword(password);
         super.setCredentials(this);
-        //super(username, password);
         encryptUserData();
     }
 
@@ -52,7 +53,9 @@ public class Credentials extends User implements ICredentials {
         aesKey = stringEncrypter.getEncryptionKey();
         encryptedUsernameData = stringEncrypter.encrypt(username, aesKey, stringEncrypter.getCurrentCipher());
         encryptedPasswordData = stringEncrypter.encrypt(password, aesKey, stringEncrypter.getCurrentCipher());
-        encryptedPassword = new String(encryptedPasswordData, StandardCharsets.UTF_8);
+        encryptedPassword = StringUtils.scramble(StringUtils.scramble (
+                KSPMMStringFormatter.format(Base64.encode(new String(encryptedPasswordData, StandardCharsets.UTF_8).getBytes())))
+        );
     }
 
     private void validateUsernameAndPassword() {
