@@ -13,7 +13,9 @@ import java.awt.event.WindowEvent;
 import java.io.FileNotFoundException;
 
 /**
- * <p>The primary controller that acts as a middleman between the model and the UI</p>
+ * <p>
+ *     The primary middleware controller delegate between model and UI objects
+ * </p>
  *
  * @author Tyler Hostager
  * @version 2/13/17
@@ -32,17 +34,16 @@ public class MainViewController {
             return false;
         }
 
-        view.setupMainFrame();
-
         AsyncTask.execute(() -> {
             Log.DEBUG("Generating table model...");
-            model.setTableModel(new KSPMMTableModel());
-            KSPMMTableModel tableModel = new KSPMMTableModel(model);
+            KSPMMTableModel tableModel = new KSPMMTableModel();
             model.setTableModel(tableModel);
             view.setTableModel(tableModel);
             view.setScrollPane(tableModel.getScrollPane());
             Log.DEBUG("Table model generated successfully");
         });
+
+        view.setupMainFrame();
 
         addListeners();
         return true;

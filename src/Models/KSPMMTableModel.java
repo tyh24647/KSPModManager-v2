@@ -21,7 +21,7 @@ public class KSPMMTableModel extends KSPMMAbstractTableModel implements TableMod
 
     private static final Color
             OFF_WHITE = new Color(230, 230, 210),
-            BRIGHT_CYAN = CYAN.brighter().brighter().brighter(),
+            BRIGHT_CYAN = CYAN.brighter().brighter().brighter().brighter().brighter(),
             DARK_CYAN = CYAN.darker().darker().darker();
 
     public static final String[] COLUMN_NAMES = {
@@ -40,7 +40,7 @@ public class KSPMMTableModel extends KSPMMAbstractTableModel implements TableMod
     //private Object[][] data;
     private JTable table;
     private TableColumn enabledColumn;
-    
+
     private Object[][] data = {
             {Boolean.TRUE, "c2", "c3", "c4"},
             {Boolean.TRUE, "AFGGc4", "q346q", "asdf"},

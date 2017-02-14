@@ -15,6 +15,7 @@ import javax.crypto.spec.SecretKeySpec;
 import java.security.Key;
 import java.security.SecureRandom;
 
+import static Constants.StrConstants.AES;
 import static Constants.StrConstants.DEFAULT_SALT;
 import static Constants.StrConstants.EMPTY;
 
@@ -99,7 +100,7 @@ public class KSPMMStringEncrypter extends AESEncryption {
      * <u>
      *     <b>Note:</b>
      *     &nbsp;
-     *     the parameters for the encryption must have the following requirements:
+     *     the parameters for the encryption algorithm must meet the following requirements:
      * </u>
      * <ul>
      *     <li>After being hashed (Sha1) and encoded (Base64), the secret key cannot be more than 16 bits in size</li>
@@ -110,7 +111,7 @@ public class KSPMMStringEncrypter extends AESEncryption {
      * @param str           The string to be encoded
      * @param secretKey     The secret key by which the encryption is performed
      * @param cipher        The cipher object for encryption (default is "AES")
-     * @return              The encrypted bytes of data
+     * @return              The encrypted byte array
      */
     public byte[] encrypt(String str, Key secretKey, Cipher cipher) {
         if (!Validator.isValidStr(str) || secretKey == null || cipher == null) {
@@ -120,8 +121,8 @@ public class KSPMMStringEncrypter extends AESEncryption {
         byte[] encrypted = null;
         try {
             byte[] keyBytes = Base64.encode(DigestUtils.sha1(secretKey.toString())).substring(0, 16).getBytes();
-            SecretKeySpec key = new SecretKeySpec(keyBytes, "AES");
-            Cipher c = Cipher.getInstance("AES");
+            SecretKeySpec key = new SecretKeySpec(keyBytes, AES);
+            Cipher c = Cipher.getInstance(AES);
             c.init(Cipher.ENCRYPT_MODE, key);
             encrypted = c.doFinal(str.getBytes());
         } catch (Exception e) {

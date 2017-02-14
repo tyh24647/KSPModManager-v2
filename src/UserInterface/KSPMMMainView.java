@@ -29,7 +29,7 @@ public class KSPMMMainView extends JFrame {
             BRIGHT_CYAN = CYAN.brighter().brighter().brighter(),
             DEFAULT_CYAN = CYAN.darker(),
             LIGHT_CYAN = new Color(200, 250, 250),
-            OFF_WHITE = new Color(230, 230, 210);
+            OFF_WHITE = new Color(230, 230, 210).brighter();
 
     private JPanel mainPanel, northPanel, southPanel, eastPanel, westPanel, centerPanel;
     private JLabel titleLabel, bottomLabel;
@@ -79,7 +79,6 @@ public class KSPMMMainView extends JFrame {
     private void generateMainPanel() {
         mainPanel = new JPanel(new BorderLayout());
         mainPanel.setOpaque(true);
-        //mainPanel.setBackground(LIGHT_GRAY.brighter());
         mainPanel.setBackground(OFF_WHITE);
         mainPanel.setPreferredSize(new Dimension(1000, 800));
         add(mainPanel, BorderLayout.CENTER);
@@ -100,12 +99,6 @@ public class KSPMMMainView extends JFrame {
         mainPanel.add(northPanel, BorderLayout.NORTH);
     }
 
-    private void generateCenterPanel() {
-        this.centerPanel = centerPanel == null ? new JPanel(new BorderLayout()) : centerPanel;
-        centerPanel.setSize(mainPanel.getWidth(), mainPanel.getHeight() - 100);
-        centerPanel.setBackground(OFF_WHITE);
-    }
-
     private void generateSouthPanel() {
         southPanel = new JPanel(new BorderLayout());
         southPanel.setSize(mainPanel.getWidth(), 40);
@@ -121,6 +114,22 @@ public class KSPMMMainView extends JFrame {
         mainPanel.add(southPanel, BorderLayout.SOUTH);
     }
 
+    private void generateCenterPanel() {
+        /*
+        this.centerPanel = centerPanel == null ? new JPanel(new BorderLayout()) : centerPanel;
+        centerPanel.setSize(mainPanel.getWidth(), mainPanel.getHeight() - 100);
+        centerPanel.setBackground(OFF_WHITE);
+        centerPanel.setOpaque(true);
+        */
+        scrollPane.setSize(mainPanel.getWidth(), mainPanel.getHeight() - 100);
+        scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
+        scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
+        mainPanel.add(scrollPane, BorderLayout.CENTER);
+        scrollPane.setViewportView(tableModel.getTable());
+        repaint();
+    }
+
+    //<editor-fold desc="Description">
     public JFrame getMainFrame() {
         return this;
     }
@@ -228,6 +237,7 @@ public class KSPMMMainView extends JFrame {
     public JMenuBar getJMenuBar() {
         return super.getJMenuBar();
     }
+    //</editor-fold>
 
     /*
         private void generateCenterPanel() {
