@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import static Constants.BoolConstants.IS_MAC;
 import static Constants.BoolConstants.IS_WINDOWS;
 import static Constants.StrConstants.*;
+import static Constants.StrConstants.Characters.SPACE;
 import static Constants.StrConstants.Messages.Debug.InitializationMsgs.GENERATE_TABLE_MODEL;
 import static javax.swing.SwingUtilities.updateComponentTreeUI;
 
@@ -109,50 +110,29 @@ public class MainViewController implements ActionListener, KeyListener {
             if (menuItems.size() > 0) {
                 for (JMenuItem menuItem : menuItems) menuItem.addActionListener(this);
             }
-
-            /*
-            TODO add more functionality
-             */
         }
     }
 
     private void fireMainWindowClosed() {
         Log.DEBUG("Exiting application");
 
-        try {
-            model.saveData();
-        } catch (FileNotFoundException e) {
-            Log.ERROR(e, e.getMessage());
-            e.printStackTrace();
-            Log.DEBUG("Skipping procedure...");
-            System.exit(0);
-            Log.DEBUG("Application terminated");
-        }
+        AsyncTask.execute(() -> {
+            try {
+                model.saveData();
+            } catch (FileNotFoundException e) {
+                Log.ERROR(e, e.getMessage());
+                e.printStackTrace();
+                Log.DEBUG("Skipping procedure...");
+                System.exit(0);
+                Log.DEBUG("Application terminated");
+            }
+        });
     }
-
-    private void setModel(@Nonnull KSPModManager model) {
-        this.model = model;
-    }
-
-    @Nonnull
-    public KSPModManager getModel() {
-        return model == null ? new KSPModManager(new User()) : this.model;
-    }
-
-    private void setView(@Nonnull KSPMMMainView view) {
-        this.view = view;
-    }
-
-    @Nonnull
-    public KSPMMMainView getView() {
-        return view == null ? new KSPMMMainView() : this.view;
-    }
-
 
     /**
      * Invoked when an action occurs.
      *
-     * @param e
+     * @param e The {@link ActionEvent} instance that triggered the listener.
      */
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -162,12 +142,15 @@ public class MainViewController implements ActionListener, KeyListener {
         if (source instanceof JMenuItem) {
             JMenuItem menuItem = ((JMenuItem) source);
 
-            /*
-            Log.DEBUG(TAG, actionPerformed.concat("{\n\t{\"class\": \"" + source.getClass().getSimpleName()
-                    + "\"},\n\t{\"action\": \"" + menuItem.getText().toLowerCase().replaceAll(" ", "_") +"\"}\n}\033[0m"));
-                    */
-            Log.DEBUG(TAG, actionPerformed.concat("Sender: "  + source.getClass().getSimpleName() + "\", Action: \""
-                    + menuItem.getText().toLowerCase().replaceAll(" ", "_") + "\"") + " ");
+            AsyncTask.execute(() -> {
+                Log.DEBUG(TAG, actionPerformed.concat(
+                        "{\n\t{\"class\": \""
+                        + source.getClass().getSimpleName()
+                        + "\"},\n\t{\"action\": \""
+                        + menuItem.getText().toLowerCase().replaceAll(SPACE, "_")
+                        + "\"}\n}\033[0m"
+                ));
+            });
 
             if (menuItem.equals(view.getFullscreenItem())) {
                 AsyncTask.execute(() -> {
@@ -228,4 +211,24 @@ public class MainViewController implements ActionListener, KeyListener {
     public void keyReleased(KeyEvent e) {
 
     }
+
+    private void setModel(@Nonnull KSPModManager model) {
+        this.model = model;
+    }
+
+    @Nonnull
+    public KSPModManager getModel() {
+        return model == null ? new KSPModManager(new User()) : this.model;
+    }
+
+    private void setView(@Nonnull KSPMMMainView view) {
+        this.view = view;
+    }
+
+    @Nonnull
+    public KSPMMMainView getView() {
+        return view == null ? new KSPMMMainView() : this.view;
+    }
+
+
 }
