@@ -9,7 +9,8 @@
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../KSPMM/src/Utils/FileUtilities/FileManager.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Controllers/MainViewController.java" afterPath="$PROJECT_DIR$/src/Controllers/MainViewController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Utils/OSUtils/MacOSX/MacOSXUtils.java" afterPath="$PROJECT_DIR$/src/Utils/OSUtils/MacOSX/MacOSXUtils.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/KSPMM.java" afterPath="$PROJECT_DIR$/src/KSPMM.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/UserInterface/KSPMMMainView.java" afterPath="$PROJECT_DIR$/src/UserInterface/KSPMMMainView.java" />
     </list>
     <ignored path="KSPModManager-v2.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -55,21 +56,21 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="MainViewController.java" pinned="false" current-in-tab="true">
+          <file leaf-file-name="MainViewController.java" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/Controllers/MainViewController.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="299">
-                  <caret line="177" column="50" selection-start-line="177" selection-start-column="50" selection-end-line="177" selection-end-column="50" />
+                <state relative-caret-position="559">
+                  <caret line="69" column="40" selection-start-line="69" selection-start-column="40" selection-end-line="69" selection-end-column="40" />
                   <folding />
                 </state>
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="KSPMM.java" pinned="false" current-in-tab="false">
+          <file leaf-file-name="KSPMM.java" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/KSPMM.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="420">
-                  <caret line="28" column="38" selection-start-line="28" selection-start-column="38" selection-end-line="28" selection-end-column="38" />
+                <state relative-caret-position="405">
+                  <caret line="27" column="66" selection-start-line="27" selection-start-column="66" selection-end-line="27" selection-end-column="66" />
                   <folding />
                 </state>
               </provider>
@@ -112,11 +113,11 @@
           <file leaf-file-name="KSPMMMainView.java" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/UserInterface/KSPMMMainView.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="242">
-                  <caret line="255" column="40" selection-start-line="255" selection-start-column="40" selection-end-line="255" selection-end-column="40" />
+                <state relative-caret-position="164">
+                  <caret line="378" column="5" selection-start-line="378" selection-start-column="5" selection-end-line="378" selection-end-column="5" />
                   <folding>
-                    <element signature="e#15655#15656#0" expanded="true" />
-                    <element signature="e#15688#15689#0" expanded="true" />
+                    <element signature="e#15729#15730#0" expanded="true" />
+                    <element signature="e#15762#15763#0" expanded="true" />
                     <element signature="n#!!doc;n#getMainFrame#0;n#KSPMMMainView#0" expanded="false" />
                     <element signature="n#!!doc;n#setJMenuBar#0;n#KSPMMMainView#0" expanded="false" />
                   </folding>
@@ -174,7 +175,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/Constants/_original_ColorConstants.java" />
         <option value="$PROJECT_DIR$/src/Constants/ColorConstants.java" />
         <option value="$PROJECT_DIR$/src/Constants/IColorConstant.java" />
         <option value="$PROJECT_DIR$/src/Constants/ColorType.java" />
@@ -217,7 +217,6 @@
         <option value="$PROJECT_DIR$/src/UserInterface/Components/TMenu.java" />
         <option value="$PROJECT_DIR$/src/Models/KSPMMTableModel.java" />
         <option value="$PROJECT_DIR$/src/Models/KSPModManager.java" />
-        <option value="$PROJECT_DIR$/src/UserInterface/KSPMMMainView.java" />
         <option value="$PROJECT_DIR$/src/Utils/StringUtils/StringUtils.java" />
         <option value="$PROJECT_DIR$/src/Tasks/AsyncTask.java" />
         <option value="$PROJECT_DIR$/src/Constants/StrConstants.java" />
@@ -225,6 +224,8 @@
         <option value="$PROJECT_DIR$/.idea/libraries/commons_bcel_6_0.xml" />
         <option value="$PROJECT_DIR$/src/Utils/OSUtils/MacOSX/MacOSXUtils.java" />
         <option value="$PROJECT_DIR$/src/Controllers/MainViewController.java" />
+        <option value="$PROJECT_DIR$/src/KSPMM.java" />
+        <option value="$PROJECT_DIR$/src/UserInterface/KSPMMMainView.java" />
       </list>
     </option>
   </component>
@@ -948,7 +949,14 @@
       <option name="project" value="LOCAL" />
       <updated>1487194707928</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Update: Fixed view issues on windows">
+      <created>1487198339460</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1487198339460</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TodoView">
@@ -1038,7 +1046,8 @@
     <MESSAGE value="Add: JTable view, dummy test jtable data" />
     <MESSAGE value="Add: Mac fullscreen/view default options, constants, OS utilites, JMenuItems, command recognition, and several other objects" />
     <MESSAGE value="Add: Missing jar libraries which prevented this from being run onto another machine" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add: Missing jar libraries which prevented this from being run onto another machine" />
+    <MESSAGE value="Update: Fixed view issues on windows" />
+    <option name="LAST_COMMIT_MESSAGE" value="Update: Fixed view issues on windows" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1369,14 +1378,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/KSPMM.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="420">
-          <caret line="28" column="38" selection-start-line="28" selection-start-column="38" selection-end-line="28" selection-end-column="38" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Utils/OSUtils/MacOSX/MacOSXUtils.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="540">
@@ -1387,19 +1388,27 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Controllers/MainViewController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="299">
-          <caret line="177" column="50" selection-start-line="177" selection-start-column="50" selection-end-line="177" selection-end-column="50" />
+        <state relative-caret-position="559">
+          <caret line="69" column="40" selection-start-line="69" selection-start-column="40" selection-end-line="69" selection-end-column="40" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/KSPMM.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="405">
+          <caret line="27" column="66" selection-start-line="27" selection-start-column="66" selection-end-line="27" selection-end-column="66" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/UserInterface/KSPMMMainView.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="242">
-          <caret line="255" column="40" selection-start-line="255" selection-start-column="40" selection-end-line="255" selection-end-column="40" />
+        <state relative-caret-position="164">
+          <caret line="378" column="5" selection-start-line="378" selection-start-column="5" selection-end-line="378" selection-end-column="5" />
           <folding>
-            <element signature="e#15655#15656#0" expanded="true" />
-            <element signature="e#15688#15689#0" expanded="true" />
+            <element signature="e#15729#15730#0" expanded="true" />
+            <element signature="e#15762#15763#0" expanded="true" />
             <element signature="n#!!doc;n#getMainFrame#0;n#KSPMMMainView#0" expanded="false" />
             <element signature="n#!!doc;n#setJMenuBar#0;n#KSPMMMainView#0" expanded="false" />
           </folding>

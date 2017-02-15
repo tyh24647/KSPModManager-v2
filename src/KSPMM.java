@@ -6,6 +6,8 @@ import Objects.Users.UserAttributes.Credentials;
 import UserInterface.KSPMMMainView;
 import Utils.Log;
 
+import javax.swing.*;
+
 import static Constants.StrConstants.ApplicationDefaults.DEFAULT_PASSWORD;
 import static Constants.StrConstants.ApplicationDefaults.DEFAULT_USERNAME;
 import static Constants.StrConstants.Messages.Debug.Actions.APP_LAUNCH;
@@ -23,9 +25,17 @@ public class KSPMM {
 
     /**
      * <p>The main method for running the program</p>
-     * @param args
+     * @param args  The arguments taken in to run the application.
      */
     public static void main(String[] args) {
+        try {
+            Log.DEBUG("Setting default look and feel to system value...");
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+            Log.DEBUG("UIManager", "Look and feel set successfully");
+        } catch (Exception e) {
+            Log.ERROR(e, e.getMessage());
+        }
+
         Log.DEBUG(TAG, GENERATE_USER);
         User user = new Credentials(DEFAULT_USERNAME, DEFAULT_PASSWORD);
         Log.DEBUG(TAG, GENERATE_MODEL);

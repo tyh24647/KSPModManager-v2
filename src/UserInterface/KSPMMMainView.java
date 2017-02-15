@@ -9,7 +9,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 
-import static Constants.BoolConstants.IS_MAC;
+import static Constants.BoolConstants.*;
 import static Constants.StrConstants.ApplicationDefaults.APP_TITLE;
 import static Constants.StrConstants.ENTER_FULLSCREEN;
 import static Constants.StrConstants.LabelText.BOTTOM_LABEL_TXT;
@@ -216,11 +216,11 @@ public class KSPMMMainView extends JFrame {
         importItem.setMnemonic(VK_I);
         importItem.setAccelerator(KeyStroke.getKeyStroke(VK_I, CMD_MASK));
         fileItems.add(openItem);
-        fileItems.add(new JSeparator());
+        addSeparator(fileItems);
         fileItems.add(importItem);
 
         if (!IS_MAC) {
-            fileItems.add(new JSeparator());
+            addSeparator(fileItems);
             exitItem = new JMenuItem("Quit KSP Mod Manager");
             exitItem.setMnemonic(VK_Q);
             exitItem.setAccelerator(KeyStroke.getKeyStroke(VK_Q, CTRL_MASK));
@@ -244,7 +244,7 @@ public class KSPMMMainView extends JFrame {
         redoItem.setMnemonic(VK_R);
         redoItem.setAccelerator(KeyStroke.getKeyStroke(VK_Z, CMD_MASK + SHIFT_MASK));
         editItems.add(redoItem);
-        editItems.add(new JSeparator());
+        addSeparator(editItems);
         selectAllItem = new JMenuItem("Select All");
         selectAllItem.setMnemonic(VK_S);
         selectAllItem.setAccelerator(KeyStroke.getKeyStroke(VK_A, CMD_MASK));
@@ -253,7 +253,7 @@ public class KSPMMMainView extends JFrame {
         itemEnabledItem.setMnemonic(VK_P);
         itemEnabledItem.setAccelerator(KeyStroke.getKeyStroke(VK_E, CMD_MASK));
         editItems.add(itemEnabledItem);
-        editItems.add(new JSeparator());
+        addSeparator(editItems);
         prefsItem = new JMenuItem("Preferences");
         prefsItem.setMnemonic(VK_P);
         prefsItem.setAccelerator(KeyStroke.getKeyStroke(VK_P, CMD_MASK));
@@ -271,7 +271,7 @@ public class KSPMMMainView extends JFrame {
         viewLogsItem.setMnemonic(VK_L);
         viewLogsItem.setAccelerator(KeyStroke.getKeyStroke(VK_L, CMD_MASK));
         viewItems.add(viewLogsItem);
-        viewItems.add(new JSeparator());
+        addSeparator(viewItems);
 
         // TODO CHANGE TO SHOW/HIDE INDIVIDUAL COMPONENTS
         showComponentsItem = new JMenuItem("Show Components");
@@ -279,8 +279,6 @@ public class KSPMMMainView extends JFrame {
         viewItems.add(showComponentsItem);
         // TODO CHANGE TO SHOW/HIDE INDIVIDUAL COMPONENTS
 
-
-        viewItems.add(new JSeparator());
         menuItems.addAll(viewItems);
         for (JComponent item : viewItems) viewMenu.add(item);
         menus.add(viewMenu);
@@ -290,7 +288,8 @@ public class KSPMMMainView extends JFrame {
         toolsMenu = new JMenu("Tools");
         toolsMenu.setMnemonic(VK_T);
         toolsItems = new ArrayList<>();
-        toolsItems.add(new JSeparator());
+        addSeparator(toolsItems);
+        addSeparator(toolsItems);
         updateItem = new JMenuItem("Check for updates...");
         updateItem.setMnemonic(VK_C);
         toolsItems.add(updateItem);
@@ -302,11 +301,10 @@ public class KSPMMMainView extends JFrame {
     private void generateWindowMenu() {
         windowMenu = new JMenu("Window");
         windowItems = new ArrayList<>();
-        windowItems.add(new JSeparator());
         themeItem = new JMenuItem("Change theme...");
         themeItem.setMnemonic(VK_C);
         windowItems.add(themeItem);
-        windowItems.add(new JSeparator());
+        addSeparator(windowItems);
         fullscreenItem = new JMenuItem(ENTER_FULLSCREEN); // TODO: Change to exit fullscreen in action listener
         fullscreenItem.setMnemonic(VK_F);
         fullscreenItem.setAccelerator(KeyStroke.getKeyStroke(VK_F, SHIFT_MASK + CMD_MASK));
@@ -323,12 +321,12 @@ public class KSPMMMainView extends JFrame {
         showConsoleItem.setMnemonic(VK_S);
         showConsoleItem.setAccelerator(KeyStroke.getKeyStroke(VK_D, CMD_MASK));
         debugItems.add(showConsoleItem);
-        debugItems.add(new JSeparator());
+        addSeparator(debugItems);
         viewThreadsItem = new JMenuItem("View Active Threads");
         viewThreadsItem.setMnemonic(VK_V);
         viewThreadsItem.setAccelerator(KeyStroke.getKeyStroke(VK_T, CMD_MASK + ALT_MASK));
         debugItems.add(viewThreadsItem);
-        debugItems.add(new JSeparator());
+        addSeparator(debugItems);
         dumpProcessItem = new JMenuItem("Show Process Dump");
         dumpProcessItem.setMnemonic(VK_S);
         debugItems.add(dumpProcessItem);
@@ -336,11 +334,11 @@ public class KSPMMMainView extends JFrame {
         dumpProcessToFileItem.setMnemonic(VK_D);
         dumpProcessToFileItem.setAccelerator(KeyStroke.getKeyStroke(VK_P, CMD_MASK + SHIFT_MASK));
         debugItems.add(dumpProcessToFileItem);
-        debugItems.add(new JSeparator());
+        addSeparator(debugItems);
         openLogsFolderItem = new JMenuItem("Open Logs Folder...");
         openLogsFolderItem.setMnemonic(VK_O);
         debugItems.add(openLogsFolderItem);
-        debugItems.add(new JSeparator());
+        addSeparator(debugItems);
         reportBugsItem = new JMenuItem("Submit Bug Report");
         reportBugsItem.setMnemonic(VK_S);
         reportBugsItem.setAccelerator(KeyStroke.getKeyStroke(VK_R, CMD_MASK));
@@ -357,11 +355,11 @@ public class KSPMMMainView extends JFrame {
         helpItem.setMnemonic(VK_H);
         helpItem.setAccelerator(KeyStroke.getKeyStroke(VK_H, CMD_MASK));
         helpItems.add(helpItem);
-        helpItems.add(new JSeparator());
+        addSeparator(helpItems);
         aboutItem = new JMenuItem("About KSPMM");
         aboutItem.setMnemonic(VK_A);
         helpItems.add(aboutItem);
-        helpItems.add(new JSeparator());
+        addSeparator(helpItems);
         contactItem = new JMenuItem("Contact us");
         contactItem.setMnemonic(VK_C);
         helpItems.add(contactItem);
@@ -378,6 +376,16 @@ public class KSPMMMainView extends JFrame {
         JComponent[] elements = new JComponent[components.size()];
         for (int i = 0; i < components.size(); i++) elements[i] = components.get(i);
         return elements;
+    }
+
+    private void addSeparator(ArrayList<JComponent> components) {
+        if (IS_WINDOWS) {
+            return;
+        }
+
+        if (IS_MAC || IS_LINUX || IS_SOLARIS) {
+            components.add(new JSeparator());
+        }
     }
 
     public void setMenuItems(@Nonnull ArrayList<JComponent> menuItems) {

@@ -16,10 +16,10 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
 import static Constants.BoolConstants.IS_MAC;
-import static Constants.StrConstants.ENTER_FULLSCREEN;
-import static Constants.StrConstants.EXIT_FULLSCREEN;
+import static Constants.BoolConstants.IS_WINDOWS;
+import static Constants.StrConstants.*;
 import static Constants.StrConstants.Messages.Debug.InitializationMsgs.GENERATE_TABLE_MODEL;
-import static Constants.StrConstants.generateTagForName;
+import static javax.swing.SwingUtilities.updateComponentTreeUI;
 
 /**
  * <p>The primary middleware controller delegate between model and UI objects.</p>
@@ -59,6 +59,17 @@ public class MainViewController implements ActionListener, KeyListener {
             });
 
         });
+
+        if (IS_WINDOWS) {
+            try {
+                UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
+            } catch (Exception e) {
+                Log.ERROR(e, e.getMessage());
+            }
+
+            updateComponentTreeUI(view);
+        }
+
         return true;
     }
 
