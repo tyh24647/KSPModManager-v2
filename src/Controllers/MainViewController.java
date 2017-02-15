@@ -6,6 +6,7 @@ import Objects.Users.User;
 import Tasks.AsyncTask;
 import UserInterface.KSPMMMainView;
 import Utils.Log;
+import Utils.OSUtils.MacOSX.MacOSXUtils;
 
 import javax.annotation.Nonnull;
 import javax.swing.*;
@@ -174,7 +175,7 @@ public class MainViewController implements ActionListener, KeyListener {
         }
 
         if (IS_MAC) {
-            com.apple.eawt.Application.getApplication().requestToggleFullScreen(view);
+            MacOSXUtils.requestOSXFullScreen(view);
         } else {
             GraphicsDevice device = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
             device.setFullScreenWindow(view);

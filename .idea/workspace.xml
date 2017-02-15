@@ -5,22 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9d94d1ef-152f-4458-9551-595e1187b472" name="Default" comment="Add: Mac fullscreen/view default options, constants, OS utilites, JMenuItems, command recognition, and several other objects">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/MRJToolkitStubs-1.0.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/checker.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-bcel-6.0.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-codec-1.10.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-io-2.5.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/commons-net-3.5.jar" />
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../KSPMM/.idea/vcs.xml" />
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../KSPMM/src/Utils/FileUtilities/FileManager.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/MRJToolkitStubs_1_0.xml" afterPath="$PROJECT_DIR$/.idea/libraries/MRJToolkitStubs_1_0.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/checker.xml" afterPath="$PROJECT_DIR$/.idea/libraries/checker.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/commons_bcel_6_0.xml" afterPath="$PROJECT_DIR$/.idea/libraries/commons_bcel_6_0.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/commons_codec_1_10.xml" afterPath="$PROJECT_DIR$/.idea/libraries/commons_codec_1_10.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/commons_io_2_5.xml" afterPath="$PROJECT_DIR$/.idea/libraries/commons_io_2_5.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/commons_net_3_5.xml" afterPath="$PROJECT_DIR$/.idea/libraries/commons_net_3_5.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/KSPModManager-v2.iml" afterPath="$PROJECT_DIR$/KSPModManager-v2.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Controllers/MainViewController.java" afterPath="$PROJECT_DIR$/src/Controllers/MainViewController.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Utils/OSUtils/MacOSX/MacOSXUtils.java" afterPath="$PROJECT_DIR$/src/Utils/OSUtils/MacOSX/MacOSXUtils.java" />
     </list>
     <ignored path="KSPModManager-v2.iws" />
@@ -67,27 +55,17 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="MainViewController.java" pinned="false" current-in-tab="false">
+          <file leaf-file-name="MainViewController.java" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/Controllers/MainViewController.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="2325">
-                  <caret line="168" column="33" selection-start-line="168" selection-start-column="33" selection-end-line="168" selection-end-column="33" />
+                <state relative-caret-position="299">
+                  <caret line="177" column="50" selection-start-line="177" selection-start-column="50" selection-end-line="177" selection-end-column="50" />
                   <folding />
                 </state>
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="Annotations.class" pinned="false" current-in-tab="false">
-            <entry file="jar://$USER_HOME$/Documents/JAR Files/checker.jar!/annotations/Annotations.class">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="690">
-                  <caret line="49" column="0" selection-start-line="49" selection-start-column="0" selection-end-line="49" selection-end-column="0" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="KSPMM.java" pinned="false" current-in-tab="true">
+          <file leaf-file-name="KSPMM.java" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/KSPMM.java">
               <provider selected="true" editor-type-id="text-editor">
                 <state relative-caret-position="420">
@@ -131,10 +109,10 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="KSPMMMainView.java" pinned="false" current-in-tab="false">
+          <file leaf-file-name="KSPMMMainView.java" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/UserInterface/KSPMMMainView.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="257">
+                <state relative-caret-position="242">
                   <caret line="255" column="40" selection-start-line="255" selection-start-column="40" selection-end-line="255" selection-end-column="40" />
                   <folding>
                     <element signature="e#15655#15656#0" expanded="true" />
@@ -156,11 +134,11 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="MacOSXUtils.java" pinned="false" current-in-tab="true">
+          <file leaf-file-name="MacOSXUtils.java" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/Utils/OSUtils/MacOSX/MacOSXUtils.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="300">
-                  <caret line="47" column="43" selection-start-line="47" selection-start-column="43" selection-end-line="47" selection-end-column="43" />
+                <state relative-caret-position="540">
+                  <caret line="71" column="5" selection-start-line="71" selection-start-column="5" selection-end-line="71" selection-end-column="5" />
                   <folding />
                 </state>
               </provider>
@@ -243,10 +221,10 @@
         <option value="$PROJECT_DIR$/src/Utils/StringUtils/StringUtils.java" />
         <option value="$PROJECT_DIR$/src/Tasks/AsyncTask.java" />
         <option value="$PROJECT_DIR$/src/Constants/StrConstants.java" />
-        <option value="$PROJECT_DIR$/src/Controllers/MainViewController.java" />
         <option value="$PROJECT_DIR$/src/Utils/OSUtils/MacOSX/DockBarAdapter.java" />
         <option value="$PROJECT_DIR$/.idea/libraries/commons_bcel_6_0.xml" />
         <option value="$PROJECT_DIR$/src/Utils/OSUtils/MacOSX/MacOSXUtils.java" />
+        <option value="$PROJECT_DIR$/src/Controllers/MainViewController.java" />
       </list>
     </option>
   </component>
@@ -963,7 +941,14 @@
       <option name="project" value="LOCAL" />
       <updated>1487162354271</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Add: Missing jar libraries which prevented this from being run onto another machine">
+      <created>1487194707928</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1487194707928</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TodoView">
@@ -991,7 +976,7 @@
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.329602" sideWeight="0.49713877" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.12013889" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.12013889" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -1052,7 +1037,8 @@
     <MESSAGE value="Add: User interface, JTable, and AsyncTask classes" />
     <MESSAGE value="Add: JTable view, dummy test jtable data" />
     <MESSAGE value="Add: Mac fullscreen/view default options, constants, OS utilites, JMenuItems, command recognition, and several other objects" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add: Mac fullscreen/view default options, constants, OS utilites, JMenuItems, command recognition, and several other objects" />
+    <MESSAGE value="Add: Missing jar libraries which prevented this from being run onto another machine" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add: Missing jar libraries which prevented this from being run onto another machine" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1074,12 +1060,6 @@
           <line>91</line>
           <properties />
           <option name="timeStamp" value="44" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/Controllers/MainViewController.java</url>
-          <line>159</line>
-          <properties />
-          <option name="timeStamp" value="50" />
         </line-breakpoint>
       </breakpoints>
       <option name="time" value="51" />
@@ -1349,19 +1329,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/UserInterface/KSPMMMainView.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="257">
-          <caret line="255" column="40" selection-start-line="255" selection-start-column="40" selection-end-line="255" selection-end-column="40" />
-          <folding>
-            <element signature="e#15655#15656#0" expanded="true" />
-            <element signature="e#15688#15689#0" expanded="true" />
-            <element signature="n#!!doc;n#getMainFrame#0;n#KSPMMMainView#0" expanded="false" />
-            <element signature="n#!!doc;n#setJMenuBar#0;n#KSPMMMainView#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Tasks/AsyncTask.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="195">
@@ -1386,14 +1353,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Controllers/MainViewController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2325">
-          <caret line="168" column="33" selection-start-line="168" selection-start-column="33" selection-end-line="168" selection-end-column="33" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$USER_HOME$/Documents/JAR Files/checker.jar!/annotations/Annotations.class">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="690">
@@ -1410,19 +1369,40 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Utils/OSUtils/MacOSX/MacOSXUtils.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="47" column="43" selection-start-line="47" selection-start-column="43" selection-end-line="47" selection-end-column="43" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/KSPMM.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="420">
           <caret line="28" column="38" selection-start-line="28" selection-start-column="38" selection-end-line="28" selection-end-column="38" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Utils/OSUtils/MacOSX/MacOSXUtils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="540">
+          <caret line="71" column="5" selection-start-line="71" selection-start-column="5" selection-end-line="71" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Controllers/MainViewController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="299">
+          <caret line="177" column="50" selection-start-line="177" selection-start-column="50" selection-end-line="177" selection-end-column="50" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/UserInterface/KSPMMMainView.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="242">
+          <caret line="255" column="40" selection-start-line="255" selection-start-column="40" selection-end-line="255" selection-end-column="40" />
+          <folding>
+            <element signature="e#15655#15656#0" expanded="true" />
+            <element signature="e#15688#15689#0" expanded="true" />
+            <element signature="n#!!doc;n#getMainFrame#0;n#KSPMMMainView#0" expanded="false" />
+            <element signature="n#!!doc;n#setJMenuBar#0;n#KSPMMMainView#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
