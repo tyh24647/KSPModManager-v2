@@ -1,7 +1,7 @@
 <component name="libraryTable">
   <library name="checker">
     <CLASSES>
-      <root url="jar://$USER_HOME$/Documents/JAR Files/checker.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/checker.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

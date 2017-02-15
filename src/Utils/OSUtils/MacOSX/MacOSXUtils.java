@@ -2,6 +2,7 @@ package Utils.OSUtils.MacOSX;
 
 import Utils.Log;
 import com.apple.mrj.MRJAboutHandler;
+import com.apple.mrj.MRJOpenApplicationHandler;
 import com.apple.mrj.MRJPrefsHandler;
 import com.apple.mrj.MRJQuitHandler;
 import com.google.common.base.Preconditions;
@@ -13,7 +14,7 @@ import java.lang.reflect.Method;
 import static Constants.StrConstants.Messages.Debug.Actions.APP_EXIT;
 import static Constants.StrConstants.Messages.Debug.Success.APP_TERMINATED;
 import static Constants.StrConstants.Messages.JOptionPane.*;
-import static Constants.StrConstants.SystemPreferences.MacOSX.*;
+import static Constants.StrConstants.SystemPreferences.MacOSX.FULLSCREEN_UTILS;
 import static Constants.StrConstants.Tags.MAC_OSX_UTILS_TAG;
 import static Constants.StrConstants.Tags.SYSTEM_TAG;
 import static javax.swing.JOptionPane.INFORMATION_MESSAGE;
@@ -22,7 +23,7 @@ import static javax.swing.JOptionPane.INFORMATION_MESSAGE;
  * @author Tyler Hostager
  * @version 2/14/17
  */
-public class MacOSXUtils implements MRJAboutHandler, MRJQuitHandler, MRJPrefsHandler {
+public class MacOSXUtils implements MRJAboutHandler, MRJQuitHandler, MRJPrefsHandler, MRJOpenApplicationHandler {
     private static final String TAG = MAC_OSX_UTILS_TAG;
     private JComponent parentComponent;
 
@@ -32,32 +33,6 @@ public class MacOSXUtils implements MRJAboutHandler, MRJQuitHandler, MRJPrefsHan
 
     public MacOSXUtils(JComponent parentComponent) {
         setParentComponent(parentComponent);
-    }
-
-    @Override
-    public void handleAbout() {
-        JOptionPane.showMessageDialog(
-                parentComponent, JOPTIONPANE_ABOUT,
-                JOPTIONPANE_ABOUT, INFORMATION_MESSAGE
-        );
-    }
-
-    @Override
-    public void handlePrefs() throws IllegalStateException {
-        JOptionPane.showMessageDialog(
-                parentComponent, JOPTIONPANE_PREFS,
-                JOPTIONPANE_PREFS, INFORMATION_MESSAGE
-        );
-    }
-
-    @Override
-    public void handleQuit() {
-        JOptionPane.showMessageDialog(
-                parentComponent, JOPTIONPANE_QUIT,
-                JOPTIONPANE_QUIT, INFORMATION_MESSAGE
-        );
-
-        exitApplication();
     }
 
     private void exitApplication() {
@@ -110,45 +85,35 @@ public class MacOSXUtils implements MRJAboutHandler, MRJQuitHandler, MRJPrefsHan
     public JComponent getParentComponent() {
         return parentComponent;
     }
+
+    @Override
+    public void handleAbout() {
+        JOptionPane.showMessageDialog(
+                parentComponent, JOPTIONPANE_ABOUT,
+                JOPTIONPANE_ABOUT, INFORMATION_MESSAGE
+        );
+    }
+
+    @Override
+    public void handlePrefs() throws IllegalStateException {
+        JOptionPane.showMessageDialog(
+                parentComponent, JOPTIONPANE_PREFS,
+                JOPTIONPANE_PREFS, INFORMATION_MESSAGE
+        );
+    }
+
+    @Override
+    public void handleQuit() {
+        JOptionPane.showMessageDialog(
+                parentComponent, JOPTIONPANE_QUIT,
+                JOPTIONPANE_QUIT, INFORMATION_MESSAGE
+        );
+
+        exitApplication();
+    }
+
+    @Override
+    public void handleOpenApplication() {
+
+    }
 }
-
-/*
-package com.devdaily.opensource.jelly.controller;
-
-import javax.swing.JOptionPane;
-import com.apple.mrj.MRJAboutHandler;
-import com.apple.mrj.MRJPrefsHandler;
-import com.apple.mrj.MRJQuitHandler;
-
-public class MacOSXController
-implements MRJAboutHandler, MRJQuitHandler, MRJPrefsHandler
-{
-
-  public void handleAbout()
-  {
-    JOptionPane.showMessageDialog(null,
-                                  "about",
-                                  "about",
-                                  JOptionPane.INFORMATION_MESSAGE);
-  }
-
-  public void handlePrefs() throws IllegalStateException
-  {
-    JOptionPane.showMessageDialog(null,
-                                  "prefs",
-                                  "prefs",
-                                  JOptionPane.INFORMATION_MESSAGE);
-  }
-
-  public void handleQuit() throws IllegalStateException
-  {
-    JOptionPane.showMessageDialog(null,
-                                  "quit",
-                                  "quit",
-                                  JOptionPane.INFORMATION_MESSAGE);
-    // handle exit here
-    // System.exit(0);
-  }
-
-}
- */
