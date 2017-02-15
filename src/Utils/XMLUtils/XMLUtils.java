@@ -8,14 +8,17 @@ import org.checkerframework.checker.nullness.qual.NonNull;
 import java.io.File;
 
 import static Constants.Defaults.DEBUG;
-import static Constants.StrConstants.*;
+import static Constants.StrConstants.Names.Directories.DEFAULT_APP_DATA_DIR_NAME;
+import static Constants.StrConstants.Names.Directories.DEFAULT_USER_DATA_DIR_NAME;
+import static Constants.StrConstants.Tags.XML_WRITER_TAG;
+import static Constants.StrConstants.generateTagForName;
 
 /**
  * @author Tyler Hostager
  * @version 2/12/17
  */
 public class XMLUtils {
-    private static final String TAG = "XMLUtils: ";
+    private static final String TAG = generateTagForName(XMLUtils.class.getSimpleName());
 
     public static boolean xmlDocExistsAtPath(String filePath, boolean isUserData) {
         if (! Validator.isValidStr(filePath)) {

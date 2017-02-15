@@ -2,14 +2,15 @@ package Utils.StringUtils;
 
 import Utils.Log;
 
-import static Constants.StrConstants.*;
+import static Constants.StrConstants.Characters.*;
+import static Constants.StrConstants.generateTagForName;
 
 /**
  * @author Tyler Hostager
  * @version 2/12/17
  */
 public class KSPMMStringFormatter extends StringUtils {
-    private static final String TAG = "KSPMMStringFormatter: ";
+    private static final String TAG = generateTagForName(KSPMMStringFormatter.class.getSimpleName());
 
     public static String format(String str) {
         Log.DEBUG(TAG, "formatting \"" + str + "\"");

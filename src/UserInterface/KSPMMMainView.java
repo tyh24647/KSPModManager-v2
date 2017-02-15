@@ -7,11 +7,19 @@ import Utils.Log;
 import javax.annotation.Nonnull;
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
 
-import static Constants.StrConstants.*;
+import static Constants.BoolConstants.IS_MAC;
+import static Constants.StrConstants.ApplicationDefaults.APP_TITLE;
+import static Constants.StrConstants.LabelText.BOTTOM_LABEL_TXT;
+import static Constants.StrConstants.LabelText.TITLE_LABEL_TXT;
+import static Constants.StrConstants.Messages.Debug.Success.GENERATE_UI_SUCCESS;
+import static Constants.StrConstants.Tags.MAIN_VIEW_TAG;
+import static Utils.OSUtils.OSUtils.configureOSLookAndFeel;
 import static java.awt.Color.CYAN;
 import static java.awt.Font.ITALIC;
 import static java.awt.Font.PLAIN;
+import static java.awt.event.KeyEvent.*;
 import static javax.swing.SwingConstants.CENTER;
 
 /**
@@ -23,6 +31,8 @@ import static javax.swing.SwingConstants.CENTER;
  * @note REMEMBER TO KEEP EVERYTHING CLASSED-OUT IN PROPER MVC FORMAT. NO CHEATING.
  */
 public class KSPMMMainView extends JFrame {
+    private static final int CMD_MASK = IS_MAC ? META_MASK : CTRL_MASK;
+    private static final String TAG = MAIN_VIEW_TAG;
 
     private static final Color
             DARK_CYAN = CYAN.darker().darker().darker(),
@@ -31,49 +41,98 @@ public class KSPMMMainView extends JFrame {
             LIGHT_CYAN = new Color(200, 250, 250),
             OFF_WHITE = new Color(230, 230, 210).brighter();
 
-    private JPanel mainPanel, northPanel, southPanel, eastPanel, westPanel, centerPanel;
+    private JPanel mainPanel, northPanel, southPanel, eastPanel, westPanel;
     private JLabel titleLabel, bottomLabel;
     private JScrollPane scrollPane;
     private KSPMMTableModel tableModel;
-    private JTable jTable;
+    private JTable table;
+    private JMenuBar menuBar;
+
+
+    private JMenu fileMenu, editMenu, viewMenu, windowMenu, toolsMenu, debugMenu, helpMenu;
+
+    private ArrayList<JMenu> menus;
+
+    private JMenuItem openItem, importItem, exitItem, undoItem, redoItem, prefsItem, selectAllItem,
+            itemEnabledItem, viewLogsItem, showComponentsItem, showConsoleItem, openLogsFolderItem,
+            fullscreenItem, themeItem, aboutItem, contactItem, helpItem, updateItem,
+            viewThreadsItem, reportBugsItem, dumpProcessItem, dumpProcessToFileItem,
+            enableAllItem, disableAllItem;
+
+    private ArrayList<JComponent> fileItems, editItems, viewItems, windowItems,
+            toolsItems, debugItems, helpItems, panels, menuItems;
 
     public KSPMMMainView() {
         try {
-            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+            configureOSLookAndFeel(this);
+            Log.DEBUG(TAG, GENERATE_UI_SUCCESS);
         } catch (Exception e) {
             Log.ERROR(e, e.getMessage());
         }
     }
 
-    public void setupMainFrame() {
-        setTitle(TITLE);
-        generatePanels();   //  <-- loaded on background thread to prevent lag
-        initMainFrame();
-    }
-
-    /**
-     * <p>
-     *     Loads panels via async - prevents the application from hanging
-     *     up when loading UI graphics/data
-     * </p>
-     */
-    private void generatePanels() {
-        AsyncTask.execute(() -> {
-            Log.DEBUG("Generating panel content on background thread...");
-            generateMainPanel();
-            generateNorthPanel();
-            generateCenterPanel();
-            generateSouthPanel();
-            Log.DEBUG("Panels successfully created");
-        });
-    }
-
     private void initMainFrame() {
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setPreferredSize(new Dimension(1000, 800));
+        getRootPane().setWindowDecorationStyle(JRootPane.FRAME);
         setResizable(true);
-        pack();
         setVisible(true);
+        pack();
+    }
+
+    public void setupMainFrame() {
+        setTitle(APP_TITLE);
+        menus = new ArrayList<>();
+        generatePanels();   //  <-- loaded on background thread to prevent lag
+        initMainFrame();
+        generateMenuBar();
+    }
+
+    private void generateMenuBar() {
+        menuBar = new JMenuBar();
+        menuItems = new ArrayList<>();
+
+        AsyncTask.execute(() -> {
+            generateMenus();
+            repaint();
+        });
+
+        setJMenuBar(menuBar);
+    }
+
+    /**
+     * <p>Asynchronously generates the JPanels to add to the main panel</p>
+     *
+     * @note These panels must be generated in this order, because the size of
+     * some of the {@link JComponent}s depend on the size of one that was
+     * previously generated
+     */
+    private void generatePanels() {
+        panels = new ArrayList<>();
+        AsyncTask.execute(() -> {
+            Log.DEBUG(TAG, "Generating panel content on background thread...");
+            generateMainPanel();
+            generateNorthPanel();
+            generateSouthPanel();
+            generateEastPanel();
+            generateWestPanel();
+            generateCenterPanel();
+            Log.DEBUG(TAG, "Panels successfully created");
+        });
+
+        repaint();
+    }
+
+    private void generateMenus() {
+        menus = new ArrayList<>();
+        generateFileMenu();
+        generateEditMenu();
+        generateViewMenu();
+        generateToolsMenu();
+        generateWindowMenu();
+        generateDebugMenu();
+        generateHelpMenu();
+        for (JMenu menu : menus) menuBar.add(menu);
     }
 
     private void generateMainPanel() {
@@ -82,6 +141,7 @@ public class KSPMMMainView extends JFrame {
         mainPanel.setBackground(OFF_WHITE);
         mainPanel.setPreferredSize(new Dimension(1000, 800));
         add(mainPanel, BorderLayout.CENTER);
+        panels.add(mainPanel);
     }
 
     private void generateNorthPanel() {
@@ -97,6 +157,7 @@ public class KSPMMMainView extends JFrame {
         titleLabel.setPreferredSize(northPanel.getSize());
         northPanel.add(titleLabel, BorderLayout.CENTER);
         mainPanel.add(northPanel, BorderLayout.NORTH);
+        panels.add(northPanel);
     }
 
     private void generateSouthPanel() {
@@ -112,24 +173,214 @@ public class KSPMMMainView extends JFrame {
         bottomLabel.setPreferredSize(southPanel.getSize());
         southPanel.add(bottomLabel, BorderLayout.CENTER);
         mainPanel.add(southPanel, BorderLayout.SOUTH);
+        panels.add(southPanel);
+    }
+
+    private void generateEastPanel() {
+        eastPanel = new JPanel(new BorderLayout());
+
+        /*
+        TODO
+         */
+
+        panels.add(eastPanel);
+    }
+
+    private void generateWestPanel() {
+        westPanel = new JPanel(new BorderLayout());
+
+        /*
+        TODO
+         */
+
+        panels.add(westPanel);
     }
 
     private void generateCenterPanel() {
-        /*
-        this.centerPanel = centerPanel == null ? new JPanel(new BorderLayout()) : centerPanel;
-        centerPanel.setSize(mainPanel.getWidth(), mainPanel.getHeight() - 100);
-        centerPanel.setBackground(OFF_WHITE);
-        centerPanel.setOpaque(true);
-        */
-        scrollPane.setSize(mainPanel.getWidth(), mainPanel.getHeight() - 100);
+        scrollPane.setSize(mainPanel.getWidth(), mainPanel.getHeight() - (northPanel.getHeight() + southPanel.getHeight()));
         scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
         scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
-        mainPanel.add(scrollPane, BorderLayout.CENTER);
         scrollPane.setViewportView(tableModel.getTable());
-        repaint();
+        mainPanel.add(scrollPane, BorderLayout.CENTER);
+        panels.add(scrollPane);
     }
 
-    //<editor-fold desc="Description">
+    private void generateFileMenu() {
+        fileMenu = new JMenu("File");
+        fileItems = new ArrayList<>();
+        openItem = new JMenuItem("Open Mods Folder...");
+        openItem.setMnemonic(VK_O);
+        openItem.setAccelerator(KeyStroke.getKeyStroke(VK_O, CMD_MASK));
+        importItem = new JMenuItem("Import Mod...");
+        importItem.setMnemonic(VK_I);
+        importItem.setAccelerator(KeyStroke.getKeyStroke(VK_I, CMD_MASK));
+        fileItems.add(openItem);
+        fileItems.add(new JSeparator());
+        fileItems.add(importItem);
+
+        if (!IS_MAC) {
+            fileItems.add(new JSeparator());
+            exitItem = new JMenuItem("Quit KSP Mod Manager");
+            exitItem.setMnemonic(VK_Q);
+            exitItem.setAccelerator(KeyStroke.getKeyStroke(VK_Q, CTRL_MASK));
+            fileItems.add(exitItem);
+        }
+
+        menuItems.addAll(fileItems);
+        for (JComponent item : fileItems) fileMenu.add(item);
+        menus.add(fileMenu);
+    }
+
+    private void generateEditMenu() {
+        editMenu = new JMenu("Edit");
+        editMenu.setMnemonic(VK_E);
+        editItems = new ArrayList<>();
+        undoItem = new JMenuItem("Undo");
+        undoItem.setMnemonic(VK_Z);
+        undoItem.setAccelerator(KeyStroke.getKeyStroke(VK_Z, CMD_MASK));
+        editItems.add(undoItem);
+        redoItem = new JMenuItem("Redo");
+        redoItem.setMnemonic(VK_R);
+        redoItem.setAccelerator(KeyStroke.getKeyStroke(VK_Z, CMD_MASK + SHIFT_MASK));
+        editItems.add(redoItem);
+        editItems.add(new JSeparator());
+        itemEnabledItem = new JMenuItem("Enable Selected Item(s)");    // TODO: Change text in action listener to disabled if enabled
+        itemEnabledItem.setMnemonic(VK_P);
+        itemEnabledItem.setAccelerator(KeyStroke.getKeyStroke(VK_E, CMD_MASK));
+        editItems.add(itemEnabledItem);
+        editItems.add(new JSeparator());
+        prefsItem = new JMenuItem("Preferences");
+        prefsItem.setMnemonic(VK_P);
+        prefsItem.setAccelerator(KeyStroke.getKeyStroke(VK_P, CMD_MASK));
+        editItems.add(prefsItem);
+        menuItems.addAll(editItems);
+        for (JComponent item : editItems) editMenu.add(item);
+        menus.add(editMenu);
+    }
+
+    private void generateViewMenu() {
+        viewMenu = new JMenu("View");
+        viewMenu.setMnemonic(VK_V);
+        viewItems = new ArrayList<>();
+        viewLogsItem = new JMenuItem("Log");
+        viewLogsItem.setMnemonic(VK_L);
+        viewLogsItem.setAccelerator(KeyStroke.getKeyStroke(VK_L, CMD_MASK));
+        viewItems.add(viewLogsItem);
+        viewItems.add(new JSeparator());
+
+        // TODO CHANGE TO SHOW/HIDE INDIVIDUAL COMPONENTS
+        showComponentsItem = new JMenuItem("Show Components");
+        showComponentsItem.setMnemonic(VK_S);
+        viewItems.add(showComponentsItem);
+        // TODO CHANGE TO SHOW/HIDE INDIVIDUAL COMPONENTS
+
+
+        viewItems.add(new JSeparator());
+        menuItems.addAll(viewItems);
+        for (JComponent item : viewItems) viewMenu.add(item);
+        menus.add(viewMenu);
+    }
+
+    private void generateToolsMenu() {
+        toolsMenu = new JMenu("Tools");
+        toolsMenu.setMnemonic(VK_T);
+        toolsItems = new ArrayList<>();
+        selectAllItem = new JMenuItem("Select All");
+        selectAllItem.setMnemonic(VK_S);
+        selectAllItem.setAccelerator(KeyStroke.getKeyStroke(VK_A, CMD_MASK));
+        toolsItems.add(selectAllItem);
+        toolsItems.add(new JSeparator());
+        updateItem = new JMenuItem("Check for updates...");
+        updateItem.setMnemonic(VK_C);
+        toolsItems.add(updateItem);
+        menuItems.addAll(toolsItems);
+        for (JComponent item : toolsItems) toolsMenu.add(item);
+        menus.add(toolsMenu);
+    }
+
+    private void generateWindowMenu() {
+        windowMenu = new JMenu("Window");
+        windowItems = new ArrayList<>();
+        windowItems.add(new JSeparator());
+        themeItem = new JMenuItem("Change theme...");
+        themeItem.setMnemonic(VK_C);
+        windowItems.add(themeItem);
+        windowItems.add(new JSeparator());
+        fullscreenItem = new JMenuItem("Enter Fullscreen"); // TODO: Change to exit fullscreen in action listener
+        fullscreenItem.setMnemonic(VK_F);
+        fullscreenItem.setAccelerator(KeyStroke.getKeyStroke(VK_F, SHIFT_MASK + CMD_MASK));
+        windowItems.add(fullscreenItem);
+        menuItems.addAll(windowItems);
+        for (JComponent item : windowItems) windowMenu.add(item);
+        menus.add(windowMenu);
+    }
+
+    private void generateDebugMenu() {
+        debugMenu = new JMenu("Debug");
+        debugItems = new ArrayList<>();
+        showConsoleItem = new JMenuItem("Show Debug Console");
+        showConsoleItem.setMnemonic(VK_S);
+        showConsoleItem.setAccelerator(KeyStroke.getKeyStroke(VK_D, CMD_MASK));
+        debugItems.add(showConsoleItem);
+        debugItems.add(new JSeparator());
+        viewThreadsItem = new JMenuItem("View Active Threads");
+        viewThreadsItem.setMnemonic(VK_V);
+        viewThreadsItem.setAccelerator(KeyStroke.getKeyStroke(VK_T, CMD_MASK + ALT_MASK));
+        debugItems.add(viewThreadsItem);
+        debugItems.add(new JSeparator());
+        dumpProcessItem = new JMenuItem("Show Process Dump");
+        dumpProcessItem.setMnemonic(VK_S);
+        debugItems.add(dumpProcessItem);
+        dumpProcessToFileItem = new JMenuItem("Dump Current Process...");
+        dumpProcessToFileItem.setMnemonic(VK_D);
+        dumpProcessToFileItem.setAccelerator(KeyStroke.getKeyStroke(VK_P, CMD_MASK + SHIFT_MASK));
+        debugItems.add(dumpProcessToFileItem);
+        debugItems.add(new JSeparator());
+        openLogsFolderItem = new JMenuItem("Open Logs Folder...");
+        openLogsFolderItem.setMnemonic(VK_O);
+        debugItems.add(openLogsFolderItem);
+        debugItems.add(new JSeparator());
+        reportBugsItem = new JMenuItem("Submit Bug Report");
+        reportBugsItem.setMnemonic(VK_S);
+        reportBugsItem.setAccelerator(KeyStroke.getKeyStroke(VK_R, CMD_MASK));
+        debugItems.add(reportBugsItem);
+        menuItems.addAll(debugItems);
+        for (JComponent item : debugItems) debugMenu.add(item);
+        menus.add(debugMenu);
+    }
+
+    private void generateHelpMenu() {
+        helpMenu = new JMenu("Help");
+        helpItems = new ArrayList<>();
+        helpItem = new JMenuItem("Help");
+        helpItem.setMnemonic(VK_H);
+        helpItem.setAccelerator(KeyStroke.getKeyStroke(VK_H, CMD_MASK));
+        helpItems.add(helpItem);
+        helpItems.add(new JSeparator());
+        aboutItem = new JMenuItem("About KSPMM");
+        aboutItem.setMnemonic(VK_A);
+        helpItems.add(aboutItem);
+        helpItems.add(new JSeparator());
+        contactItem = new JMenuItem("Contact us");
+        contactItem.setMnemonic(VK_C);
+        helpItems.add(contactItem);
+        menuItems.addAll(helpItems);
+        for (JComponent item : helpItems) helpMenu.add(item);
+        menus.add(helpMenu);
+    }
+
+    public JComponent[] getAllElements() {
+        ArrayList<JComponent> components = new ArrayList<>();
+        components.addAll(menus);
+        components.addAll(menuItems);
+        components.addAll(panels);
+        JComponent[] elements = new JComponent[components.size()];
+        for (int i = 0; i < components.size(); i++) elements[i] = components.get(i);
+        return elements;
+    }
+
+    //region ACCESSOR METHODS
+    @Nonnull
     public JFrame getMainFrame() {
         return this;
     }
@@ -162,12 +413,12 @@ public class KSPMMMainView extends JFrame {
     }
 
     public void setJTable(@Nonnull JTable jTable) {
-        this.jTable = jTable;
+        this.table = jTable;
     }
 
     @Nonnull
     public JTable getJTable() {
-        return jTable;
+        return table;
     }
 
     public void setMainPanel(@Nonnull JPanel mainPanel) {
@@ -181,15 +432,6 @@ public class KSPMMMainView extends JFrame {
 
     public void setNorthPanel(@Nonnull JPanel northPanel) {
         this.northPanel = northPanel;
-    }
-
-    public void setCenterPanel(@Nonnull JPanel centerPanel) {
-        this.centerPanel = centerPanel;
-    }
-
-    @Nonnull
-    public JPanel getCenterPanel() {
-        return centerPanel;
     }
 
     public void setScrollPane(@Nonnull JScrollPane scrollPane) {
@@ -227,7 +469,9 @@ public class KSPMMMainView extends JFrame {
     public JLabel getTitleLabel() {
         return titleLabel;
     }
+    //endregion
 
+    //region OVERRIDE METHODS
     @Override
     public void setJMenuBar(@Nonnull JMenuBar menubar) {
         super.setJMenuBar(menubar);
@@ -235,108 +479,7 @@ public class KSPMMMainView extends JFrame {
 
     @Override
     public JMenuBar getJMenuBar() {
-        return super.getJMenuBar();
+        return menuBar;
     }
-    //</editor-fold>
-
-    /*
-        private void generateCenterPanel() {
-        centerPanel = centerPanel == null ? new JPanel(new BorderLayout()) : centerPanel;
-        centerPanel.setPreferredSize(DEFAULT_CENTER_PANEL_SIZE);
-
-        // add scroll pane with jtable
-        centerScrollPane = tableModel.getScrollPane();
-        centerScrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
-        centerScrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-
-        menuBar.setOpaque(true);
-        menuBar.setUI(new BasicMenuBarUI() {
-            @Override
-            public void paint(Graphics g, JComponent c) {
-                g.setColor(Color.CYAN.darker());
-                g.fillRect(0, 0, c.getWidth(), c.getHeight());
-            }
-        });
-
-        menuBar.setBorder(BorderFactory.createEmptyBorder());
-
-        // add top bar
-        northPanel = new JPanel(new BorderLayout()) {
-            @Override
-            public void setBorder(Border border) {
-                super.setBorder(BorderFactory.createEmptyBorder());
-            }
-        };
-
-        northPanel.setPreferredSize(TOP_PANE_PREFERRED_SIZE);
-        topLabel = new JLabel(WINDOW_TITLE) {
-            @Override
-            public void setOpaque(boolean isOpaque) {
-                super.setOpaque(true);
-            }
-
-            @Override
-            public void setFont(Font font) {
-                String tableFont = tableModel.getTable().getFont().deriveFont(Font.PLAIN).getFontName();
-                super.setFont(new Font(tableFont, Font.PLAIN, 20));
-            }
-
-            @Override
-            public void setBackground(Color bg) {
-                super.setBackground(Color.cyan.darker());
-            }
-        };
-
-        topLabel.setOpaque(false);
-        topLabel.setHorizontalAlignment(SwingConstants.CENTER);
-        topLabel.setVerticalAlignment(SwingConstants.CENTER);
-        topLabel.setPreferredSize(northPanel.getSize());
-        northPanel.add(topLabel, BorderLayout.CENTER);
-        mainPanel.add(northPanel, BorderLayout.NORTH);
-
-
-        // init south panel
-        southPanel = new JPanel(new BorderLayout()) {
-            @Override
-            public void setBorder(Border border) {
-                super.setBorder(BorderFactory.createEmptyBorder());
-            }
-        };
-
-        southPanel.setPreferredSize(BOTTOM_PANE_PREFERRED_SIZE);
-        bottomLabel = new JLabel(COPYRIGHT_MSG) {
-            @Override
-            public void setOpaque(boolean isOpaque) {
-                super.setOpaque(true);
-            }
-
-            @Override
-            public void setFont(Font font) {
-                String tblFnt = tableModel.getTable().getFont().deriveFont(Font.PLAIN).getFontName();
-                super.setFont(new Font(tblFnt, Font.PLAIN, 14));
-            }
-
-            @Override
-            public void setBackground(Color bg) {
-                super.setBackground(Color.CYAN.darker().darker().darker());
-            }
-
-            @Override
-            public void setForeground(Color fg) {
-                super.setForeground(Color.CYAN.brighter().brighter().brighter().brighter());
-            }
-        };
-
-        bottomLabel.setHorizontalAlignment(SwingConstants.CENTER);
-        bottomLabel.setVerticalAlignment(SwingConstants.CENTER);
-        bottomLabel.setPreferredSize(southPanel.getSize());
-        southPanel.add(bottomLabel, BorderLayout.CENTER);
-        mainPanel.add(southPanel, BorderLayout.SOUTH);
-
-        // add scrollpane to main panel
-        mainPanel.add(centerScrollPane, BorderLayout.CENTER);
-        centerScrollPane.setViewportView(tableViewController.getModel().getTable());
-        repaint();
-    }
-     */
+    //endregion
 }

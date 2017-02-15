@@ -6,8 +6,8 @@ import Utils.Validator;
 
 import java.security.Key;
 
-import static Constants.StrConstants.DEFAULT_PASSWORD;
-import static Constants.StrConstants.DEFAULT_USERNAME;
+import static Constants.StrConstants.ApplicationDefaults.DEFAULT_PASSWORD;
+import static Constants.StrConstants.ApplicationDefaults.DEFAULT_USERNAME;
 
 
 /**

@@ -7,6 +7,8 @@ import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 
+import static org.apache.commons.lang3.StringUtils.EMPTY;
+
 /**
  * User Defaults
  *
@@ -18,9 +20,11 @@ public final class Defaults {
     //region CONSTANTS
     public static final Object[][] EMPTY_DATA_TABLE = new Object[0][0];
 
+    /*
     public static final String
             DEFAULT_USERNAME = "default",
             DEFAULT_PASSWORD = "default";
+    */
 
     public static final boolean
             IS_ADMIN = true,
@@ -66,7 +70,7 @@ public final class Defaults {
 
     private static String getUserDirectoryFilePathStr() {
         String defaultDirPath = System.getProperty("user.dir");
-        String rVal = StrConstants.EMPTY;
+        String rVal = EMPTY;
         String fullPath;
         if (defaultDirPath != null && !defaultDirPath.isEmpty()) {
             StringBuilder sb = new StringBuilder(defaultDirPath);
@@ -90,7 +94,7 @@ public final class Defaults {
                                 }
 
                                 if (Validator.isValidStr(rVal)) {
-                                    rVal = StrConstants.EMPTY;
+                                    rVal = EMPTY;
                                     break validationLoop;
                                 }
                             }

@@ -15,9 +15,9 @@ import javax.crypto.spec.SecretKeySpec;
 import java.security.Key;
 import java.security.SecureRandom;
 
-import static Constants.StrConstants.AES;
-import static Constants.StrConstants.DEFAULT_SALT;
-import static Constants.StrConstants.EMPTY;
+import static Constants.StrConstants.Characters.EMPTY;
+import static Constants.StrConstants.Encryption.AES;
+import static Constants.StrConstants.Encryption.DEFAULT_SALT;
 
 /**
  * @author Tyler Hostager
@@ -93,7 +93,7 @@ public class KSPMMStringEncrypter extends AESEncryption {
 
     /**
      * <p>
-     *     Encrypts the specified <code>String</code> using a generated secret key, which
+     *     Encrypts the specified {@link String} using a generated secret key, which
      *     is created based on the specific login time, the username, the Sha1 hash value,
      *     Base64 encoding, and AES encryption.
      * </p>
@@ -104,8 +104,8 @@ public class KSPMMStringEncrypter extends AESEncryption {
      * </u>
      * <ul>
      *     <li>After being hashed (Sha1) and encoded (Base64), the secret key cannot be more than 16 bits in size</li>
-     *     <li>After being encoded, the <code>String</code> cannot include escape characters</li>
-     *     <li>The encryption cannot be performed on a null <code>String</code> value</li>
+     *     <li>After being encoded, the {@link String} cannot include escape characters</li>
+     *     <li>The encryption cannot be performed on a null {@link String} value</li>
      * </ul>
      *
      * @param str           The string to be encoded

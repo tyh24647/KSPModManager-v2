@@ -15,7 +15,10 @@ import javax.crypto.Cipher;
 import javax.crypto.spec.SecretKeySpec;
 import java.security.Key;
 
-import static Constants.StrConstants.*;
+import static Constants.StrConstants.Encryption.AES;
+import static Constants.StrConstants.Encryption.DEFAULT_SALT;
+import static Constants.StrConstants.Titles.Encryption.AES_KEY_TITLE;
+import static Constants.StrConstants.generateTagForName;
 
 /**
  * @author Tyler Hostager
@@ -23,7 +26,7 @@ import static Constants.StrConstants.*;
  */
 public class AESEncryption {
 
-    private static final String TAG = "AESEncryption: ";
+    private static final String TAG = generateTagForName(AESEncryption.class.getSimpleName());
 
     protected static Cipher cipher;
 

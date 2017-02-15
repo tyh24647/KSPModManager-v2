@@ -1,9 +1,10 @@
 package Objects.Data.PrefsElements.Child.Elements;
 
-import Constants.StrConstants;
 import Utils.Validator;
 
 import javax.annotation.Nonnull;
+
+import static Constants.StrConstants.Characters.EMPTY;
 
 /**
  * @author Tyler Hostager
@@ -20,7 +21,7 @@ public class PrefsValue {
     public PrefsValue(@Nonnull Object value) {
         if (value.getClass().equals(String.class)) {
             if (!Validator.isValidStr(value.toString())) {
-                value = StrConstants.EMPTY;
+                value = EMPTY;
             }
         }
 
@@ -32,7 +33,7 @@ public class PrefsValue {
     }
 
     public @Nonnull Object getValue() {
-        return value == null ? StrConstants.EMPTY : value;
+        return value == null ? EMPTY : value;
     }
 
     @Override

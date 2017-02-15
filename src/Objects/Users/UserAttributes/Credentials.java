@@ -1,8 +1,8 @@
 package Objects.Users.UserAttributes;
 
-import Constants.StrConstants;
 import Objects.Users.User;
 import Utils.EncryptionUtils.StringEncryption.KSPMMStringEncrypter;
+import Utils.Log;
 import Utils.StringUtils.KSPMMStringFormatter;
 import Utils.StringUtils.StringUtils;
 import com.sun.org.apache.xerces.internal.impl.dv.util.Base64;
@@ -10,13 +10,18 @@ import com.sun.org.apache.xerces.internal.impl.dv.util.Base64;
 import javax.annotation.Nonnull;
 import java.nio.charset.StandardCharsets;
 
-import static Constants.StrConstants.DEFAULT_USERNAME;
+import static Constants.StrConstants.ApplicationDefaults.DEFAULT_PASSWORD;
+import static Constants.StrConstants.ApplicationDefaults.DEFAULT_USERNAME;
+import static Constants.StrConstants.Messages.Debug.Success.GENERATE_USER_SUCCESS;
+import static Constants.StrConstants.Tags.CREDENTIALS_TAG;
 
 /**
  * @author Tyler Hostager
  * @version 2/12/17
  */
 public class Credentials extends User implements ICredentials {
+    private static final String TAG = CREDENTIALS_TAG;
+
     private static KSPMMStringEncrypter stringEncrypter;
     private String encryptedUsername, encryptedPassword;
     private byte[] encryptedUsernameData, encryptedPasswordData;
@@ -26,7 +31,7 @@ public class Credentials extends User implements ICredentials {
      */
     public Credentials() {
         super();
-        setUserLoginInfo(StrConstants.DEFAULT_USERNAME, StrConstants.DEFAULT_PASSWORD);
+        setUserLoginInfo(DEFAULT_USERNAME, DEFAULT_PASSWORD);
     }
 
     public Credentials(User user) {
@@ -36,6 +41,7 @@ public class Credentials extends User implements ICredentials {
 
     public Credentials(@Nonnull String username, @Nonnull String password) {
         setUserLoginInfo(username, password);
+        Log.DEBUG(TAG, GENERATE_USER_SUCCESS);
     }
 
     private void setUserLoginInfo(@Nonnull String uName, @Nonnull String pWord) {
@@ -55,10 +61,10 @@ public class Credentials extends User implements ICredentials {
     }
 
     /**
-     * <p>Generates the <code>String</code>value of a <code>Base64</code> hash value</p>
+     * <p>Generates the {@link String}value of a {@link Base64} hash value</p>
      *
      * @param encryptedUsernameData The username data to format
-     * @return                      The <code>String</code> value of the decoded data
+     * @return                      The {@link String} value of the decoded data
      * @see                         KSPMMStringFormatter for usage
      */
     @Nonnull
@@ -85,7 +91,7 @@ public class Credentials extends User implements ICredentials {
     }
 
     private String initDefaultPassword() {
-        return setPassword(StrConstants.DEFAULT_PASSWORD);
+        return setPassword(DEFAULT_PASSWORD);
     }
 
     @Nonnull

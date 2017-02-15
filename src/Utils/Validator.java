@@ -1,8 +1,8 @@
 package Utils;
 
-import Constants.StrConstants;
-
 import java.util.List;
+
+import static Constants.StrConstants.Characters.EMPTY;
 
 /**
  * <p>
@@ -27,7 +27,7 @@ public class Validator {
             return false;
         }
 
-        return !val.isEmpty() || !val.equals(StrConstants.EMPTY);
+        return !val.isEmpty() || !val.equals(EMPTY);
     }
 
     /**

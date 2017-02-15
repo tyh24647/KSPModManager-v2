@@ -4,8 +4,8 @@ import Objects.Users.User;
 
 import javax.annotation.Nonnull;
 
-import static Constants.StrConstants.DEFAULT_PASSWORD;
-import static Constants.StrConstants.DEFAULT_USERNAME;
+import static Constants.StrConstants.ApplicationDefaults.DEFAULT_PASSWORD;
+import static Constants.StrConstants.ApplicationDefaults.DEFAULT_USERNAME;
 
 /**
  * @author Tyler Hostager

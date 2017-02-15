@@ -8,7 +8,7 @@ public class XMLFile {
 
     /**
      * <p>
-     *     Creates an instance of an XMLUtils document using the <code>XMLFileManager</code> class, allowing for
+     *     Creates an instance of an XMLUtils document using the {@link XMLFileManager} class, allowing for
      *     reading and writing to the XMLUtils preferences file.
      * </p>
      *

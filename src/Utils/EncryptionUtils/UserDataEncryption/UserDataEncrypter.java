@@ -4,7 +4,7 @@ import Utils.EncryptionUtils.AESEncryption;
 
 import javax.annotation.Nonnull;
 
-import static Constants.StrConstants.EMPTY;
+import static Constants.StrConstants.Characters.EMPTY;
 
 /**
  * @author Tyler Hostager

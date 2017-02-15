@@ -30,7 +30,7 @@ public class KSPMMTableModel extends KSPMMAbstractTableModel implements TableMod
 
     private static final int
             ROW_HEIGHT = 20,
-            DEFAULT_ENABLED_COLUMN_WIDTH = 50,
+            DEFAULT_ENABLED_COLUMN_WIDTH = 25,
             DEFAULT_STRING_COLUMN_WIDTH = 300,
             DEFAULT_DATE_COLUMN_WIDTH = 200,
             DEFAULT_ROW_HEIGHT = 20;

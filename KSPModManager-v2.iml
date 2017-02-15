@@ -7,10 +7,11 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" exported="" name="MRJToolkitStubs-1.0" level="project" />
     <orderEntry type="library" exported="" name="checker" level="project" />
-    <orderEntry type="library" exported="" name="jaxb-core" level="project" />
-    <orderEntry type="library" exported="" name="commons-codec-1.10" level="project" />
-    <orderEntry type="library" exported="" name="commons-io-2.5" level="project" />
-    <orderEntry type="library" exported="" name="commons-net-3.5" level="project" />
+    <orderEntry type="library" name="commons-codec-1.10" level="project" />
+    <orderEntry type="library" name="commons-net-3.5" level="project" />
+    <orderEntry type="library" name="commons-bcel-6.0" level="project" />
+    <orderEntry type="library" name="commons-io-2.5" level="project" />
   </component>
 </module>

@@ -1,10 +1,13 @@
 package Utils.StringUtils;
 
-import Constants.StrConstants;
 import Utils.Log;
 import Utils.Validator;
 
 import java.util.Random;
+
+import static Constants.StrConstants.Characters.EMPTY;
+import static Constants.StrConstants.Characters.SPACE;
+import static Constants.StrConstants.generateTagForName;
 
 /**
  * <p>Provides String-specific utilities</p>
@@ -13,23 +16,23 @@ import java.util.Random;
  * @version 2/12/17
  */
 public class StringUtils {
-    private static final String TAG = "StringUtils: ";
+    private static final String TAG = generateTagForName(StringUtils.class.getSimpleName());
 
     /**
-     * <p>Scrambles the characters in a given <code>String</code></p>
+     * <p>Scrambles the characters in a given {@link String}</p>
      * <p>
      *     This method is used for generating salt values that are randomized, and
      *     this allows for much more secured encryption.
      * </p>
      *
-     * @param str   The <code>String</code> to scramble.
-     * @return      The scrambled <code>String</code>.
+     * @param str   The {@link String} to scramble.
+     * @return      The scrambled {@link String}.
      * @see         Utils.EncryptionUtils.AESEncryption for usage
      */
     public static String scramble(String str) {
         if (!Validator.isValidStr(str)) {
-            return StrConstants.EMPTY;
-        } else if (str.contains(StrConstants.SPACE)) {
+            return EMPTY;
+        } else if (str.contains(SPACE)) {
             str = KSPMMStringFormatter.format(str);
         }
 

@@ -1,9 +1,10 @@
 package Utils;
 
-import Constants.Defaults;
-import Constants.StrConstants;
-
 import javax.annotation.Nonnull;
+
+import static Constants.Defaults.DEBUG;
+import static Constants.StrConstants.Tags.DEBUG_TAG;
+import static Constants.StrConstants.Tags.ERROR_TAG;
 
 /**
  * <p>Console logger for error and debug messages</p>
@@ -11,37 +12,42 @@ import javax.annotation.Nonnull;
  * @author Tyler Hostager
  * @version 2/12/17
  */
-public class Log {
-
+public final class Log {
     public static void DEBUG(@Nonnull String debugMsg) {
-        if (Defaults.DEBUG) {
-            System.out.println(StrConstants.DEBUG_TAG.concat(debugMsg));
+        if (DEBUG) {
+            DEBUG(DEBUG_TAG, debugMsg);
         }
     }
 
     public static void DEBUG(@Nonnull String customTag, @Nonnull String debugMsg) {
-        if (Defaults.DEBUG) {
+        if (DEBUG) {
             System.out.println(customTag.concat(debugMsg));
         }
     }
 
     public static void ERROR(@Nonnull String errMsg) {
-        if (Defaults.DEBUG) {
-            System.err.println(StrConstants.ERROR_TAG.concat(errMsg));
+        if (DEBUG) {
+            System.err.println(ERROR_TAG.concat(errMsg));
         }
     }
 
     public static void ERROR(@Nonnull Throwable err, @Nonnull String errMsg) {
-        if (Defaults.DEBUG) {
-            System.err.println(StrConstants.ERROR_TAG.concat(errMsg));
+        if (DEBUG) {
+            System.err.println(ERROR_TAG.concat(errMsg));
             err.printStackTrace();
         }
     }
 
-    public static void ERROR(@Nonnull String customErrTag, @Nonnull String errMsg) {
-        if (Defaults.DEBUG) {
-            System.err.println(customErrTag.concat(errMsg));
+    public static void ERROR(@Nonnull String errTitle, @Nonnull String errMsg) {
+        if (DEBUG) {
+            System.err.println(errTitle.concat(errMsg));
         }
     }
 
+    public static void ERROR(@Nonnull Throwable err, @Nonnull String errTitle, @Nonnull String errMsg) {
+        if (DEBUG) {
+            ERROR(errTitle, errMsg);
+            err.printStackTrace();
+        }
+    }
 }
