@@ -65,7 +65,7 @@ public class KSPMMTableModel extends KSPMMAbstractTableModel implements TableMod
 
             @Override
             public void setSelectionBackground(Color selectionBackground) {
-                super.setSelectionBackground(BRIGHT_CYAN);
+                super.setSelectionBackground(OFF_WHITE.brighter());
             }
 
             @Override

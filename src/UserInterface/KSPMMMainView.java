@@ -11,6 +11,7 @@ import java.util.ArrayList;
 
 import static Constants.BoolConstants.IS_MAC;
 import static Constants.StrConstants.ApplicationDefaults.APP_TITLE;
+import static Constants.StrConstants.ENTER_FULLSCREEN;
 import static Constants.StrConstants.LabelText.BOTTOM_LABEL_TXT;
 import static Constants.StrConstants.LabelText.TITLE_LABEL_TXT;
 import static Constants.StrConstants.Messages.Debug.Success.GENERATE_UI_SUCCESS;
@@ -244,6 +245,10 @@ public class KSPMMMainView extends JFrame {
         redoItem.setAccelerator(KeyStroke.getKeyStroke(VK_Z, CMD_MASK + SHIFT_MASK));
         editItems.add(redoItem);
         editItems.add(new JSeparator());
+        selectAllItem = new JMenuItem("Select All");
+        selectAllItem.setMnemonic(VK_S);
+        selectAllItem.setAccelerator(KeyStroke.getKeyStroke(VK_A, CMD_MASK));
+        editItems.add(selectAllItem);
         itemEnabledItem = new JMenuItem("Enable Selected Item(s)");    // TODO: Change text in action listener to disabled if enabled
         itemEnabledItem.setMnemonic(VK_P);
         itemEnabledItem.setAccelerator(KeyStroke.getKeyStroke(VK_E, CMD_MASK));
@@ -285,10 +290,6 @@ public class KSPMMMainView extends JFrame {
         toolsMenu = new JMenu("Tools");
         toolsMenu.setMnemonic(VK_T);
         toolsItems = new ArrayList<>();
-        selectAllItem = new JMenuItem("Select All");
-        selectAllItem.setMnemonic(VK_S);
-        selectAllItem.setAccelerator(KeyStroke.getKeyStroke(VK_A, CMD_MASK));
-        toolsItems.add(selectAllItem);
         toolsItems.add(new JSeparator());
         updateItem = new JMenuItem("Check for updates...");
         updateItem.setMnemonic(VK_C);
@@ -306,7 +307,7 @@ public class KSPMMMainView extends JFrame {
         themeItem.setMnemonic(VK_C);
         windowItems.add(themeItem);
         windowItems.add(new JSeparator());
-        fullscreenItem = new JMenuItem("Enter Fullscreen"); // TODO: Change to exit fullscreen in action listener
+        fullscreenItem = new JMenuItem(ENTER_FULLSCREEN); // TODO: Change to exit fullscreen in action listener
         fullscreenItem.setMnemonic(VK_F);
         fullscreenItem.setAccelerator(KeyStroke.getKeyStroke(VK_F, SHIFT_MASK + CMD_MASK));
         windowItems.add(fullscreenItem);
@@ -377,6 +378,67 @@ public class KSPMMMainView extends JFrame {
         JComponent[] elements = new JComponent[components.size()];
         for (int i = 0; i < components.size(); i++) elements[i] = components.get(i);
         return elements;
+    }
+
+    public void setMenuItems(@Nonnull ArrayList<JComponent> menuItems) {
+        this.menuItems = menuItems;
+    }
+
+    @Nonnull
+    public ArrayList<JComponent> getMenuItems() {
+        return menuItems;
+    }
+
+    public JMenuItem getAboutItem() {
+        return aboutItem;
+    }
+
+    public JMenuItem getItemEnabledItem() {
+        return itemEnabledItem;
+    }
+
+    public JMenuItem getContactItem() {
+        return contactItem;
+    }
+
+    public JMenuItem getExitItem() {
+        return exitItem;
+    }
+
+    public JMenuItem getFullscreenItem() {
+        return fullscreenItem;
+    }
+
+    public JMenuItem getHelpItem() {
+        return helpItem;
+    }
+
+    public JMenuItem getImportItem() {
+        return importItem;
+    }
+
+    public JMenuItem getOpenItem() {
+        return openItem;
+    }
+
+    public JMenuItem getPrefsItem() {
+        return prefsItem;
+    }
+
+    public JMenuItem getRedoItem() {
+        return redoItem;
+    }
+
+    public JMenuItem getThemeItem() {
+        return themeItem;
+    }
+
+    public JMenuItem getUndoItem() {
+        return undoItem;
+    }
+
+    public JMenuItem getUpdateItem() {
+        return updateItem;
     }
 
     //region ACCESSOR METHODS

@@ -48,7 +48,7 @@ public class StringUtils {
         }
 
         tmp = new String(strChars);
-        Log.DEBUG("StringUtils: ", "String successfully Scrambled: \"" + str + "\" --> \"" + tmp + "\"");
+        Log.DEBUG(TAG, "String successfully Scrambled: \"" + str + "\" --> \"" + tmp + "\"");
         return tmp;
     }
 

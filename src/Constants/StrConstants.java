@@ -2,7 +2,9 @@ package Constants;
 
 import Models.KSPModManager;
 import Objects.Users.UserAttributes.Credentials;
+import Tasks.AsyncTask;
 import UserInterface.KSPMMMainView;
+import Utils.EncryptionUtils.AESEncryption;
 import Utils.OSUtils.MacOSX.MacOSXUtils;
 import Utils.OSUtils.OSUtils;
 import Utils.Validator;
@@ -19,6 +21,8 @@ import static Constants.StrConstants.Tags.Symbols.TAG_SYMBOL;
  */
 public final class StrConstants {
     public static final String USER_OS_NAME = System.getProperty("os.name");
+    public static final String ENTER_FULLSCREEN = "Enter Fullscreen";
+    public static final String EXIT_FULLSCREEN = "Exit Fullscreen";
 
     public static final class SystemPreferences {
         public static final class MacOSX {
@@ -207,7 +211,13 @@ public final class StrConstants {
             color = ConsoleColor.DEFAULT;
         }
 
-        className = className.toUpperCase();
+        if (className.equals(AsyncTask.class.getSimpleName())) {
+            color = ConsoleColor.MAGENTA;
+        } else if (className.equals(AESEncryption.class.getSimpleName())) {
+            color = ConsoleColor.CYAN;
+        } else if (className.equals("KSPMM")) {
+            color = ConsoleColor.YELLOW;
+        }
 
         switch (color) {
             case RED:

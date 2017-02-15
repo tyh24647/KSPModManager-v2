@@ -12,8 +12,8 @@ import java.util.AbstractQueue;
  * </p>
  * <p>
  *     This class is necessary in order for the child classes to implement specific methods
- *     that are not in the predefined <code>AbstractTableModel</code> in the
- *     <code>javax.swing.table.AbstractTableModel</code> package.
+ *     that are not in the predefined {@link AbstractTableModel} in the
+ *     {@link javax.swing.table.AbstractTableModel} package.
  * </p>
  *
  * @author Tyler Hostager
@@ -34,7 +34,7 @@ abstract class KSPMMAbstractTableModel extends AbstractTableModel {
      * </p>
      * <p>
      *     This instance will give child classes the ability to access specific, customized methods of this
-     *     implementation of <code>AbstractTableModel</code>, which allows this class to be reused in different
+     *     implementation of {@link AbstractTableModel}, which allows this class to be reused in different
      *     views, thereby removing the need to recreate specific classes that have these methods duplicated.
      * </p>
      *
@@ -59,7 +59,7 @@ abstract class KSPMMAbstractTableModel extends AbstractTableModel {
     //region ABSTRACT INTERFACE METHODS TO BE OVERRIDDEN BY CHILD CLASSES
     /**
      * <p>Retrieves the background color of the table</p>
-     * @return  The background <code>Color</code> object assigned to the table
+     * @return  The background {@link Color} object assigned to the table
      */
     abstract Color getBackgroundColor();
 
@@ -72,11 +72,11 @@ abstract class KSPMMAbstractTableModel extends AbstractTableModel {
      * </u>
      * <ul>
      *     <li>Child class which extends this class</li>
-     *     <li>The default value held by the <code>AbstractTableModel</code> class</li>
+     *     <li>The default value held by the {@link AbstractTableModel} class</li>
      *     <li>The assigned value assigned to the implemented abstract table model</li>
      * </ul>
      *
-     * @return  The title <code>String</code> object that was assigned
+     * @return  The title {@link String} object that was assigned
      * @see     KSPMMTableModel serialized implementation
      */
     abstract String getTitle();
@@ -114,7 +114,7 @@ abstract class KSPMMAbstractTableModel extends AbstractTableModel {
      *     <b>Note:</b>
      *     &nbsp;
      *     Although this deletes the data associated with the table, this does not delete the data
-     *     that corresponds to the table data in the <code>KSPMMTableModel</code> object. This is used
+     *     that corresponds to the table data in the {@link KSPMMTableModel} object. This is used
      *     in order to clear out the view data in order to replace it with other data, without the view being
      *     cleared out beforehand
      * </p>

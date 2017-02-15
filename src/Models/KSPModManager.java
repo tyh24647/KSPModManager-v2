@@ -1,16 +1,23 @@
 package Models;
 
 import Constants.Defaults;
-import Constants.StrConstants;
 import Objects.Users.User;
+import Utils.Log;
 
 import java.io.FileNotFoundException;
+
+import static Constants.StrConstants.ApplicationDefaults.DEFAULT_PASSWORD;
+import static Constants.StrConstants.ApplicationDefaults.DEFAULT_USERNAME;
+import static Constants.StrConstants.Messages.Debug.Success.GENERATE_MODEL_SUCCESS;
+import static Constants.StrConstants.Tags.MODEL_TAG;
 
 /**
  * @author Tyler Hostager
  * @version 2/12/17
  */
 public class KSPModManager {
+    private static final String TAG = MODEL_TAG;
+
     private User user;
     private Object[][] data;
     private KSPMMTableModel tableModel;
@@ -19,11 +26,13 @@ public class KSPModManager {
      * Default constructor
      */
     public KSPModManager() {
-
+        setUser(new User(DEFAULT_USERNAME, DEFAULT_PASSWORD));
+        Log.DEBUG(TAG, "Default user object generated");
     }
 
     public KSPModManager(User user) {
         setUser(user);
+        Log.DEBUG(TAG, GENERATE_MODEL_SUCCESS);
     }
 
     public KSPModManager(String username, String password) {
@@ -43,11 +52,11 @@ public class KSPModManager {
     }
 
     public void setUser(User user) {
-        this.user = user == null ? new User(StrConstants.DEFAULT_USERNAME, StrConstants.DEFAULT_PASSWORD) : user;
+        this.user = user == null ? new User(DEFAULT_USERNAME, DEFAULT_PASSWORD) : user;
     }
 
     public User getUser() {
-        return user == null ? new User(StrConstants.DEFAULT_USERNAME, StrConstants.DEFAULT_PASSWORD) : user;
+        return user == null ? new User(DEFAULT_USERNAME, DEFAULT_PASSWORD) : user;
     }
 
     public void setData(Object[][] data) {

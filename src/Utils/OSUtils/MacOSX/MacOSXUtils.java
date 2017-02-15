@@ -92,7 +92,7 @@ public class MacOSXUtils implements MRJAboutHandler, MRJQuitHandler, MRJPrefsHan
             System.setProperty("apple.laf.useScreenMenuBar", "true");
             System.setProperty("apple.awt.application.name", "KSP Mod Manager");
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-            System.setProperty("com.apple.mrj.application.apple.menu.about.name", "WikiTeX");
+            System.setProperty("com.apple.mrj.application.apple.menu.about.name", "KSPMM");
             System.setProperty("apple.awt.textantialiasing", "true");
             System.setProperty("apple.awt.graphics.EnableQ2DX", "false");
             System.setProperty("apple.awt.fileDialogForDirectories", "true");
