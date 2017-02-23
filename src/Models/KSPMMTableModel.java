@@ -14,6 +14,9 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Date;
 
+import static Constants.StrConstants.Characters.EMPTY;
+import static Constants.StrConstants.DECIMAL_FORMAT;
+import static Constants.StrConstants.Headers.*;
 import static Constants.StrConstants.MODS_FOLDER_PATH;
 import static java.awt.Color.CYAN;
 
@@ -31,6 +34,30 @@ public class KSPMMTableModel extends KSPMMAbstractTableModel implements TableMod
     public static final String[] COLUMN_NAMES = {
             "Enabled", "Mod Name", "Size", "Installation Directory", "Date Added"
     };
+
+    enum Columns {
+        ENABLED(0, COLUMN_NAMES[0]),
+        MOD_NAME(1, COLUMN_NAMES[1]),
+        SIZE(2, COLUMN_NAMES[2]),
+        MOD_DIR(3, COLUMN_NAMES[3]),
+        DATE_ADDED(4, COLUMN_NAMES[4])
+        ;
+
+        private String name = null;
+        private Integer val = null;
+        Columns(Integer val, String name) {
+            this.val = val;
+            this.name = name;
+        }
+
+        public int getVal() {
+            return val == null ? -1 : this.val;
+        }
+
+        public String getName() {
+            return name == null ? EMPTY : this.name;
+        }
+    }
 
     private static final int
             ROW_HEIGHT = 20,
@@ -71,6 +98,32 @@ public class KSPMMTableModel extends KSPMMAbstractTableModel implements TableMod
             @Override
             public void setSelectionBackground(Color selectionBackground) {
                 super.setSelectionBackground(OFF_WHITE.brighter());
+            }
+
+            @Override
+            public TableCellRenderer getCellRenderer(int row, int column) {
+                TableCellRenderer renderer;
+                switch (column) {
+                    case 0:
+                        renderer = super.getDefaultRenderer(Boolean.class);
+                        break;
+                    case 1:
+                        renderer = super.getCellRenderer(row, column);
+                        break;
+                    case 2 & 3:
+                        renderer = new DefaultTableCellRenderer() {
+                            @Override
+                            public void setHorizontalAlignment(int alignment) {
+                                super.setHorizontalAlignment(SwingConstants.RIGHT);
+                            }
+                        };
+                        break;
+                    default:
+                        renderer = super.getCellRenderer(row, column);
+                        break;
+                }
+
+                return renderer;
             }
 
             @Override
@@ -145,9 +198,9 @@ public class KSPMMTableModel extends KSPMMAbstractTableModel implements TableMod
                         if (file.getName().charAt(0) != '.') {
                             userData.add(new Object[] {
                                     Boolean.TRUE,
-                                    file.getCanonicalFile().getName(),
+                                    file.getCanonicalFile().getName().replace(".dll", "").replace(".ksp", ""),
                                     getFileSizeStrForFile(file),
-                                    file.getAbsolutePath(),
+                                    (" C:").concat(file.getAbsolutePath()),
                                     new Date(file.lastModified() * 1000).toString()
                             });
                         }
@@ -186,23 +239,15 @@ public class KSPMMTableModel extends KSPMMAbstractTableModel implements TableMod
     }
 
     private String getFileSizeStrForFile(File file) {
-        if (!file.exists()) { return "0.0 GB"; }
-        double formatted;
-        long rf = (long) Math.pow(1000, 2); // round to 2 decimal places
+        if (!file.exists() && file.length() > 0) { return 0.00 + GIGABYTES; }
         double bytes = file.length();
-        formatted = (Math.round(bytes * rf) / rf);
-        if (formatted < 1000) { return formatted + " B"; }
+        if (bytes < 1000) { return String.format(DECIMAL_FORMAT, bytes) + BYTES; }
         double kilobytes = (bytes / 1024);
-        formatted = (Math.round(kilobytes * rf) / rf);
-        if (formatted < 1000) { return formatted + " KB"; }
+        if (kilobytes < 1000) { return String.format(DECIMAL_FORMAT, kilobytes)  + KILOBYTES; }
         double megabytes = (kilobytes / 1024);
-        formatted = (Math.round(megabytes * rf) / rf);
-        if (formatted < 1000) { return formatted + " MB"; }
+        if (megabytes < 1000) { return String.format(DECIMAL_FORMAT, megabytes) + MEGABYTES; }
         double gigabytes = (megabytes / 1024);
-        formatted = (Math.round(gigabytes * rf) / rf);
-        return formatted < 1000 ? formatted + " GB" : (
-                Math.round(formatted * rf) / rf
-        ) + " TB";
+        return String.format(DECIMAL_FORMAT, gigabytes) + GIGABYTES;
     }
 
     public JTable getTable() {

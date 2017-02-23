@@ -27,6 +27,15 @@ public final class StrConstants {
     public static final String ENTER_FULLSCREEN = "Enter Fullscreen";
     public static final String EXIT_FULLSCREEN = "Exit Fullscreen";
     public static final String APP_DATA_PATH = determineInstallDir();
+    public static final String DECIMAL_FORMAT = "%.2f";
+
+    public static final class Headers {
+        public static final String BYTES = "  B ";
+        public static final String KILOBYTES = " KB ";
+        public static final String MEGABYTES = " MB ";
+        public static final String GIGABYTES = " GB ";
+        public static final String TERABYTES = " TB ";
+    }
 
     public static final String MODS_FOLDER_PATH = APP_DATA_PATH.concat(
             "/Steam/steamapps/common/Kerbal Space Program/GameData/Squad"
