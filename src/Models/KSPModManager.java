@@ -4,10 +4,12 @@ import Constants.Defaults;
 import Objects.Users.User;
 import Utils.Log;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 
 import static Constants.StrConstants.ApplicationDefaults.DEFAULT_PASSWORD;
 import static Constants.StrConstants.ApplicationDefaults.DEFAULT_USERNAME;
+import static Constants.StrConstants.MODS_FOLDER_PATH;
 import static Constants.StrConstants.Messages.Debug.Success.GENERATE_MODEL_SUCCESS;
 import static Constants.StrConstants.Tags.MODEL_TAG;
 
@@ -28,11 +30,22 @@ public class KSPModManager {
     public KSPModManager() {
         setUser(new User(DEFAULT_USERNAME, DEFAULT_PASSWORD));
         Log.DEBUG(TAG, "Default user object generated");
+        loadUserDataFromDefaultPath();
     }
 
     public KSPModManager(User user) {
         setUser(user);
+        loadUserDataFromDefaultPath();
         Log.DEBUG(TAG, GENERATE_MODEL_SUCCESS);
+    }
+
+    private void loadUserDataFromDefaultPath() {
+        File kspDir = new File(MODS_FOLDER_PATH);
+        if (kspDir.exists() && kspDir.isDirectory()) {
+            Log.DEBUG("HEYYO!");
+        } else {
+            Log.DEBUG("DANG!");
+        }
     }
 
     public KSPModManager(String username, String password) {

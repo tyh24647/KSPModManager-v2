@@ -1,5 +1,7 @@
 package Constants;
 
+import java.io.File;
+
 import static org.apache.commons.lang.SystemUtils.*;
 
 /**
@@ -12,4 +14,13 @@ public final class BoolConstants {
     public static final boolean IS_SOLARIS = IS_OS_SOLARIS;
     public static final boolean IS_LINUX = IS_OS_LINUX || IS_OS_UNIX;
     public static final boolean IS_UNKNOWN = !IS_MAC && IS_WINDOWS && !IS_SOLARIS && IS_LINUX;
+    public static final boolean IS_USING_STEAM = checkIfUsingSteam();
+    public static final boolean IS_STANDALONE = !IS_USING_STEAM;
+
+    private static boolean checkIfUsingSteam() {
+        return new File(IS_MAC ?
+                StrConstants.SystemPreferences.MacOSX.APP_DATA_PATH :
+                StrConstants.SystemPreferences.Windows.APP_DATA_PATH
+        ).exists();
+    }
 }

@@ -9,6 +9,9 @@ import Utils.OSUtils.MacOSX.MacOSXUtils;
 import Utils.OSUtils.OSUtils;
 import Utils.Validator;
 
+import java.io.File;
+
+import static Constants.BoolConstants.*;
 import static Constants.StrConstants.Console.Colors.*;
 import static Constants.StrConstants.Tags.DEBUG_TAG;
 import static Constants.StrConstants.Tags.Symbols.TAG_SYMBOL;
@@ -23,14 +26,35 @@ public final class StrConstants {
     public static final String USER_OS_NAME = System.getProperty("os.name");
     public static final String ENTER_FULLSCREEN = "Enter Fullscreen";
     public static final String EXIT_FULLSCREEN = "Exit Fullscreen";
+    public static final String APP_DATA_PATH = determineInstallDir();
+
+    public static final String MODS_FOLDER_PATH = APP_DATA_PATH.concat(
+            "/Steam/steamapps/common/Kerbal Space Program/GameData/Squad"
+    );
 
     public static final class SystemPreferences {
+        public static final String STEAM_MODS_DIR_PATH = "/Steam/steamapps/" +
+                "common/Kerbal Space Program/GameData/Squad/";
+
         public static final class MacOSX {
+            public static final String ROOT_DIR = System.getProperty("user.home");
+            public static final String APP_DATA_PATH = ROOT_DIR.concat("/Library/Application Support");
             public static final String FULLSCREEN_UTILS = "com.apple.eawt.FullScreenUtilities";
             public static final String USE_SCREEN_MENU_BAR = "apple.laf.useScreenMenuBar";
             public static final String APP_ABOUT_NAME = "com.apple.mrj.application.apple.menu.about.name";
             //public static final String DEFAULT_APP_ABOUT_NAME = "WikiTeX";
             public static final String ABOUT_NAME_VALUE = "About KSPModManager";
+        }
+
+        public static final class Windows {
+            public static final String APP_DATA_PATH = System.getenv("APPDATA");
+            public static final String WIN_MOD_DIR_PATH_STEAM = System.getenv("ProgramFiles(x86)").concat(
+                    "Steam/steamapps/"
+            );
+        }
+
+        public static final class Linux {
+            public static final String APP_DATA_PATH = getLinuxInstallPath();
         }
     }
 
@@ -221,38 +245,88 @@ public final class StrConstants {
 
         switch (color) {
             case RED:
-                tag = "\033[31m".concat(className);
+                tag = "\033[31m";
                 break;
             case GREEN:
-                tag = "\033[32m".concat(className);
+                tag = "\033[32m";
                 break;
             case YELLOW:
-                tag = "\033[33m".concat(className);
+                tag = "\033[33m";
                 break;
             case BLUE:
-                tag = "\033[34m".concat(className);
+                tag = "\033[34m";
                 break;
             case MAGENTA:
-                tag = "\033[35m".concat(className);
+                tag = "\033[35m";
                 break;
             case CYAN:
-                tag = "\033[36m".concat(className);
+                tag = "\033[36m";
                 break;
             case WHITE:
-                tag = "\033[37m".concat(className);
+                tag = "\033[37m";
                 break;
             case DEFAULT:
-                tag = "\033[0m".concat(className);
+                tag = "\033[0m";
                 break;
             default:
-                tag = "\033[0m".concat(className);
+                tag = "\033[0m";
                 break;
         }
 
-        return tag.concat(TAG_SYMBOL);
+        return tag.concat(className.concat(TAG_SYMBOL));
+    }
+
+    private static String determineInstallDir() {
+        String path = "";
+
+        if (IS_USING_STEAM) {
+            if (IS_MAC) {
+                path = SystemPreferences.MacOSX.APP_DATA_PATH;
+            } else if (IS_WINDOWS) {
+                path = SystemPreferences.Windows.APP_DATA_PATH;
+            } else if (IS_LINUX) {
+                path = SystemPreferences.Linux.APP_DATA_PATH;
+            } else {
+                path = null;    // for now
+            }
+        } else {
+            if (IS_MAC) {
+                path = "~/Applications/".concat(SystemPreferences.STEAM_MODS_DIR_PATH);
+                if (!new File(path).exists()) {
+                    path = "/Applications/".concat(SystemPreferences.STEAM_MODS_DIR_PATH);
+                    if (!new File(path).exists()) {
+                        path = null;    // TODO: let user choose install dir
+                    }
+                }
+            } else if (IS_WINDOWS) {
+                // TODO figure this out
+            }
+        }
+
+
+        return path;
     }
 
 
+    private static String getLinuxInstallPath() {
+        if (!IS_LINUX) {
+            return null;
+        }
+
+        File tmpDir;
+        tmpDir = new File("~/.steam".concat(SystemPreferences.STEAM_MODS_DIR_PATH));
+        if (!tmpDir.exists()) {
+            tmpDir = new File("~/.local/share/".concat(SystemPreferences.STEAM_MODS_DIR_PATH));
+            if (!tmpDir.exists()) {
+                tmpDir = new File("/home/${USER}/".concat(SystemPreferences.STEAM_MODS_DIR_PATH));
+                if (!tmpDir.exists()) {
+                    return null;
+                }
+            }
+        }
+
+        return tmpDir.getPath();
+    }
 }
 
 

@@ -67,7 +67,7 @@ public class MacOSXUtils implements MRJAboutHandler, MRJQuitHandler, MRJPrefsHan
 
     public static void requestOSXFullScreen(@NotNull Window window) {
         if (IS_MAC) {
-            //com.apple.eawt.Application.getApplication().requestToggleFullScreen(window);
+            com.apple.eawt.Application.getApplication().requestToggleFullScreen(window);
         }
     }
 

@@ -10,7 +10,11 @@ import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.*;
 import java.awt.*;
+import java.io.File;
+import java.util.ArrayList;
+import java.util.Date;
 
+import static Constants.StrConstants.MODS_FOLDER_PATH;
 import static java.awt.Color.CYAN;
 
 /**
@@ -25,13 +29,14 @@ public class KSPMMTableModel extends KSPMMAbstractTableModel implements TableMod
             DARK_CYAN = CYAN.darker().darker().darker();
 
     public static final String[] COLUMN_NAMES = {
-            "Enabled", "Mod Name", "Installation Directory", "Date Added"
+            "Enabled", "Mod Name", "Size", "Installation Directory", "Date Added"
     };
 
     private static final int
             ROW_HEIGHT = 20,
-            DEFAULT_ENABLED_COLUMN_WIDTH = 25,
+            DEFAULT_ENABLED_COLUMN_WIDTH = 50,
             DEFAULT_STRING_COLUMN_WIDTH = 300,
+            DEFAULT_SIZE_COLUMN_WIDTH = 75,
             DEFAULT_DATE_COLUMN_WIDTH = 200,
             DEFAULT_ROW_HEIGHT = 20;
 
@@ -89,7 +94,7 @@ public class KSPMMTableModel extends KSPMMAbstractTableModel implements TableMod
             }
         };
 
-
+        loadUserDataFromDefaultPath();
 
         // add row sorter for each column
         RowSorter<TableModel> sorter = new TableRowSorter<>(this);
@@ -104,7 +109,10 @@ public class KSPMMTableModel extends KSPMMAbstractTableModel implements TableMod
                 case 0:
                     width = DEFAULT_ENABLED_COLUMN_WIDTH;
                     break;
-                case 3:
+                case 2:
+                    width = DEFAULT_SIZE_COLUMN_WIDTH;
+                    break;
+                case 4:
                     width = DEFAULT_DATE_COLUMN_WIDTH;
                     break;
                 default:
@@ -123,7 +131,78 @@ public class KSPMMTableModel extends KSPMMAbstractTableModel implements TableMod
 
         scrollPane = new JScrollPane(table);
         enabledColumn = table.getColumnModel().getColumn(0);
-        getTable();
+    }
+
+    private void loadUserDataFromDefaultPath() {
+        File kspDir = new File(MODS_FOLDER_PATH);
+        ArrayList<Object[]> userData = new ArrayList<>();
+        try {
+            Log.DEBUG("Loading mods data from directory \"" + MODS_FOLDER_PATH + "\"");
+            if (kspDir.exists() && kspDir.isDirectory()) {
+                File[] dirFiles = kspDir.listFiles();
+                if (dirFiles != null && dirFiles.length > 0) {
+                    for (File file : dirFiles) {
+                        if (file.getName().charAt(0) != '.') {
+                            userData.add(new Object[] {
+                                    Boolean.TRUE,
+                                    file.getCanonicalFile().getName(),
+                                    getFileSizeStrForFile(file),
+                                    file.getAbsolutePath(),
+                                    new Date(file.lastModified() * 1000).toString()
+                            });
+                        }
+                    }
+                }
+            } else {
+                Log.ERROR("No mods folder specified");
+                Log.DEBUG("Generating mods folder at default path...");
+                if (kspDir.mkdirs()) {
+                    Log.DEBUG("Mods folder created successfully");
+                    Log.DEBUG("Recursively reloading data after folder generation...");
+                    loadUserDataFromDefaultPath();
+                } else {
+                    Log.ERROR("Unable to generate mods folder");
+                    Log.DEBUG("Skipping procedure");
+                }
+            }
+        } catch (Exception e) {
+            Log.ERROR(e, e.getMessage());
+        }
+
+        Object[][] tmp = null;
+        if (userData.size() > 0) {
+            tmp = new Object[userData.size()][COLUMN_NAMES.length];
+
+            for (int i = 0; i < userData.size(); i++) {
+                if (userData.get(i) == null) {
+                    continue;
+                }
+
+                tmp[i] = userData.get(i);
+            }
+        }
+
+        data = tmp != null && tmp.length > 0 ? tmp : getData();
+    }
+
+    private String getFileSizeStrForFile(File file) {
+        if (!file.exists()) { return "0.0 GB"; }
+        double formatted;
+        long rf = (long) Math.pow(1000, 2); // round to 2 decimal places
+        double bytes = file.length();
+        formatted = (Math.round(bytes * rf) / rf);
+        if (formatted < 1000) { return formatted + " B"; }
+        double kilobytes = (bytes / 1024);
+        formatted = (Math.round(kilobytes * rf) / rf);
+        if (formatted < 1000) { return formatted + " KB"; }
+        double megabytes = (kilobytes / 1024);
+        formatted = (Math.round(megabytes * rf) / rf);
+        if (formatted < 1000) { return formatted + " MB"; }
+        double gigabytes = (megabytes / 1024);
+        formatted = (Math.round(gigabytes * rf) / rf);
+        return formatted < 1000 ? formatted + " GB" : (
+                Math.round(formatted * rf) / rf
+        ) + " TB";
     }
 
     public JTable getTable() {
