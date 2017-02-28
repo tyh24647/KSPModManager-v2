@@ -28,6 +28,7 @@ public final class StrConstants {
     public static final String EXIT_FULLSCREEN = "Exit Fullscreen";
     public static final String APP_DATA_PATH = determineInstallDir();
     public static final String DECIMAL_FORMAT = "%.2f";
+    public static final String DEFAULT_INSTALL_DRIVE = "C:";
 
     public static final class Headers {
         public static final String BYTES = "  B ";
@@ -37,8 +38,19 @@ public final class StrConstants {
         public static final String TERABYTES = " TB ";
     }
 
+    public static final class Extensions {
+        public static final String XML = ".xml";
+        public static final String DLL = ".dll";
+        public static final String INI = ".ini";
+        public static final String KSP = ".ksp";
+    }
+
     public static final String MODS_FOLDER_PATH = APP_DATA_PATH.concat(
             "/Steam/steamapps/common/Kerbal Space Program/GameData/Squad"
+    );
+
+    public static final String DISABLED_MODS_FOLDER_PATH = APP_DATA_PATH.concat(
+            "/Steam/steamapps/common/Kerbal Space Program/KSPMM_Disabled Mods"
     );
 
     public static final class SystemPreferences {
@@ -51,7 +63,6 @@ public final class StrConstants {
             public static final String FULLSCREEN_UTILS = "com.apple.eawt.FullScreenUtilities";
             public static final String USE_SCREEN_MENU_BAR = "apple.laf.useScreenMenuBar";
             public static final String APP_ABOUT_NAME = "com.apple.mrj.application.apple.menu.about.name";
-            //public static final String DEFAULT_APP_ABOUT_NAME = "WikiTeX";
             public static final String ABOUT_NAME_VALUE = "About KSPModManager";
         }
 
@@ -96,6 +107,7 @@ public final class StrConstants {
                 public static final String APP_LAUNCH = "Launching application...";
                 public static final String CONFIG_L_AND_F = "Configuring look and feel for operating system: \"" + USER_OS_NAME + "\"...";
                 public static final String APP_EXIT = "Exiting application...";
+                public static final String LOAD_MODS = "Loading mods data from directory \"" + DEFAULT_INSTALL_DRIVE + MODS_FOLDER_PATH + "\"";
             }
         }
 

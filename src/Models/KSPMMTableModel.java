@@ -1,6 +1,7 @@
 package Models;
 
 import Constants.Defaults;
+import Tasks.AsyncTask;
 import Utils.Log;
 import org.jetbrains.annotations.NotNull;
 
@@ -11,13 +12,16 @@ import javax.swing.event.TableModelListener;
 import javax.swing.table.*;
 import java.awt.*;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Date;
 
 import static Constants.StrConstants.Characters.EMPTY;
-import static Constants.StrConstants.DECIMAL_FORMAT;
+import static Constants.StrConstants.Characters.SPACE;
+import static Constants.StrConstants.*;
+import static Constants.StrConstants.Extensions.DLL;
+import static Constants.StrConstants.Extensions.KSP;
 import static Constants.StrConstants.Headers.*;
-import static Constants.StrConstants.MODS_FOLDER_PATH;
 import static java.awt.Color.CYAN;
 
 /**
@@ -30,6 +34,8 @@ public class KSPMMTableModel extends KSPMMAbstractTableModel implements TableMod
             OFF_WHITE = new Color(230, 230, 210),
             BRIGHT_CYAN = CYAN.brighter().brighter().brighter().brighter().brighter(),
             DARK_CYAN = CYAN.darker().darker().darker();
+
+    private boolean foldersAreVerified = false;
 
     public static final String[] COLUMN_NAMES = {
             "Enabled", "Mod Name", "Size", "Installation Directory", "Date Added"
@@ -67,23 +73,24 @@ public class KSPMMTableModel extends KSPMMAbstractTableModel implements TableMod
             DEFAULT_DATE_COLUMN_WIDTH = 200,
             DEFAULT_ROW_HEIGHT = 20;
 
+    private static final File
+            modFilesDir = new File(MODS_FOLDER_PATH),
+            disabledModsDir = new File(DISABLED_MODS_FOLDER_PATH)
+            ;
+
+
     private KSPModManager modManagerModel;
     private JScrollPane scrollPane;
-    //private Object[][] data;
+    private Object[][] data;
     private JTable table;
     private TableColumn enabledColumn;
-
-    private Object[][] data = {
-            {Boolean.TRUE, "c2", "c3", "c4"},
-            {Boolean.TRUE, "AFGGc4", "q346q", "asdf"},
-            {Boolean.TRUE, "c6", "3433333", "tmp"}
-    };
 
     public KSPMMTableModel() {
         generateTableData();
     }
 
     private void generateTableData() {
+        verifyDisabledModsDir();
         this.table = new JTable(this) {
             @Override
             public void setColumnSelectionAllowed(boolean columnSelectionAllowed) {
@@ -147,7 +154,13 @@ public class KSPMMTableModel extends KSPMMAbstractTableModel implements TableMod
             }
         };
 
-        loadUserDataFromDefaultPath();
+        Log.DEBUG("Loading user data...");
+        try {
+            loadUserDataFromDefaultPath();
+        } catch (Exception e) {
+            Log.ERROR("Could not load user data from default path");
+            Log.DEBUG("Skipping procedure");
+        }
 
         // add row sorter for each column
         RowSorter<TableModel> sorter = new TableRowSorter<>(this);
@@ -186,40 +199,68 @@ public class KSPMMTableModel extends KSPMMAbstractTableModel implements TableMod
         enabledColumn = table.getColumnModel().getColumn(0);
     }
 
-    private void loadUserDataFromDefaultPath() {
-        File kspDir = new File(MODS_FOLDER_PATH);
+    private void loadUserDataFromDefaultPath() throws Exception {
         ArrayList<Object[]> userData = new ArrayList<>();
-        try {
-            Log.DEBUG("Loading mods data from directory \"" + MODS_FOLDER_PATH + "\"");
-            if (kspDir.exists() && kspDir.isDirectory()) {
-                File[] dirFiles = kspDir.listFiles();
-                if (dirFiles != null && dirFiles.length > 0) {
-                    for (File file : dirFiles) {
-                        if (file.getName().charAt(0) != '.') {
-                            userData.add(new Object[] {
-                                    Boolean.TRUE,
-                                    file.getCanonicalFile().getName().replace(".dll", "").replace(".ksp", ""),
-                                    getFileSizeStrForFile(file),
-                                    (" C:").concat(file.getAbsolutePath()),
-                                    new Date(file.lastModified() * 1000).toString()
-                            });
+        Log.DEBUG(Messages.Debug.Actions.LOAD_MODS);
+        if (modFilesDir.exists() && modFilesDir.isDirectory()) {
+            if (! disabledModsDir.exists() || ! disabledModsDir.isDirectory()) {
+                verifyDisabledModsDir();
+            }
+
+            File[] modFiles = modFilesDir.listFiles();
+            File[] disFiles = disabledModsDir.listFiles();
+            ArrayList<String> modFileNames = null;
+            ArrayList<String> disFileNames = null;
+            boolean inOtherLst = false;
+
+            if (modFiles != null) {
+                modFileNames = new ArrayList<>();
+                for (File f : modFiles) {
+                    modFileNames.add(f.getName());
+                }
+            }
+
+            if (disFiles != null) {
+                disFileNames = new ArrayList<>();
+                for (File df : disFiles) {
+                    disFileNames.add(df.getName());
+                }
+            }
+
+            if (modFiles != null && modFiles.length > 0) {
+                for (File file : modFiles) {
+                    if (file.getName().charAt(0) != '.') {
+                        if (disFileNames != null && ! disFileNames.contains(file.getName())) {
+                            userData.add(generateModObj(file, Boolean.TRUE));
+                        } else {
+                            Log.ERROR("Duplicate mod detected -- Cannot enable or disable");
                         }
                     }
                 }
-            } else {
-                Log.ERROR("No mods folder specified");
-                Log.DEBUG("Generating mods folder at default path...");
-                if (kspDir.mkdirs()) {
-                    Log.DEBUG("Mods folder created successfully");
-                    Log.DEBUG("Recursively reloading data after folder generation...");
-                    loadUserDataFromDefaultPath();
-                } else {
-                    Log.ERROR("Unable to generate mods folder");
-                    Log.DEBUG("Skipping procedure");
+            }
+
+            if (disFiles != null && disFiles.length > 0) {
+                for (File dFile : disFiles) {
+                    if (modFileNames != null && dFile.getName().charAt(0) != '.') {
+                        if (!modFileNames.contains(dFile.getName())) {
+                            userData.add(generateModObj(dFile, Boolean.FALSE));
+                        } else {
+                            Log.ERROR("Duplicate mod detected -- Cannot enable or disable");
+                        }
+                    }
                 }
             }
-        } catch (Exception e) {
-            Log.ERROR(e, e.getMessage());
+        } else {
+            Log.ERROR("No mods folder specified");
+            Log.DEBUG("Generating mods folder at default path...");
+            if (modFilesDir.mkdirs()) {
+                Log.DEBUG("Mods folder created successfully");
+                Log.DEBUG("Recursively reloading data after folder generation...");
+                loadUserDataFromDefaultPath();
+            } else {
+                Log.ERROR("Unable to generate mods folder");
+                Log.DEBUG("Skipping procedure");
+            }
         }
 
         Object[][] tmp = null;
@@ -238,14 +279,28 @@ public class KSPMMTableModel extends KSPMMAbstractTableModel implements TableMod
         data = tmp != null && tmp.length > 0 ? tmp : getData();
     }
 
+    private Object[] generateModObj(File file, boolean isEnabled) {
+        if (file == null) {
+            return null;
+        }
+
+        return new Object[] {
+                isEnabled,
+                file.getName().replace(DLL, EMPTY).replace(KSP, EMPTY),
+                getFileSizeStrForFile(file),
+                (SPACE.concat(DEFAULT_INSTALL_DRIVE)).concat(file.getAbsolutePath()),
+                new Date(file.lastModified() * 1000).toString()
+        };
+    }
+
     private String getFileSizeStrForFile(File file) {
         if (!file.exists() && file.length() > 0) { return 0.00 + GIGABYTES; }
         double bytes = file.length();
-        if (bytes < 1000) { return String.format(DECIMAL_FORMAT, bytes) + BYTES; }
+        if (bytes < 1024) { return String.format(DECIMAL_FORMAT, bytes) + BYTES; }
         double kilobytes = (bytes / 1024);
-        if (kilobytes < 1000) { return String.format(DECIMAL_FORMAT, kilobytes)  + KILOBYTES; }
+        if (kilobytes < 1024) { return String.format(DECIMAL_FORMAT, kilobytes)  + KILOBYTES; }
         double megabytes = (kilobytes / 1024);
-        if (megabytes < 1000) { return String.format(DECIMAL_FORMAT, megabytes) + MEGABYTES; }
+        if (megabytes < 1024) { return String.format(DECIMAL_FORMAT, megabytes) + MEGABYTES; }
         double gigabytes = (megabytes / 1024);
         return String.format(DECIMAL_FORMAT, gigabytes) + GIGABYTES;
     }
@@ -308,6 +363,130 @@ public class KSPMMTableModel extends KSPMMAbstractTableModel implements TableMod
         model.addRow(rowData);
     }
 
+    private void verifyDisabledModsDir() {
+        if (!foldersAreVerified) {
+            File disabledModsDir = new File(DISABLED_MODS_FOLDER_PATH);
+            Log.DEBUG("Searching for \'Disabled Mods\' folder at path: \"" + DISABLED_MODS_FOLDER_PATH + "\"");
+            if (! disabledModsDir.exists() || ! disabledModsDir.isDirectory()) {
+                Log.ERROR("Folder not found");
+                Log.DEBUG("Attempting to create \'Disabled Mods\' folder at default path...");
+                if (disabledModsDir.mkdirs()) {
+                    Log.DEBUG("Folder generated successfully");
+                } else {
+                    Log.ERROR("Invalid permissions");
+                    Log.ERROR("Unable to create folder at the specified path");
+                    Log.DEBUG("Skipping procedure");
+                }
+            }
+
+            foldersAreVerified = true;
+        }
+    }
+
+    private void toggleModEnabledState(String name) {
+        if (data[table.getSelectedRow()][1].equals(name)) {
+            boolean isInOtherDir = false;
+
+            try {
+                ArrayList<String> dfileNames = new ArrayList<>();
+                if (disabledModsDir != null) {
+                    File[] tmp = disabledModsDir.listFiles();
+                    if (tmp != null) {
+                        for (File f : tmp) {
+                            dfileNames.add(f.getName());
+                        }
+                    }
+                }
+
+                if (! dfileNames.contains(name)) {
+                    if (modFilesDir.exists() && modFilesDir.isDirectory()) {
+
+                        File[] tmp = modFilesDir.listFiles();
+                        if (tmp == null) {
+                            toggleModEnabledState(name, Boolean.TRUE);
+                        } else {
+                            boolean isDisabled;
+                            for (File f : tmp) {
+                                isDisabled = f.getCanonicalFile().getName().equals(name);
+                                toggleModEnabledState(name, isDisabled);
+                            }
+                        }
+                    }
+                } else {
+                    if (disabledModsDir.exists() && disabledModsDir.isDirectory()) {
+                        File[] tmp = disabledModsDir.listFiles();
+                        if (tmp == null) {
+                            toggleModEnabledState(name, Boolean.FALSE);
+                        } else {
+                            boolean isDisabled;
+                            for (File df : tmp) {
+                                isDisabled = !df.getCanonicalFile().getName().equals(name);
+                                toggleModEnabledState(name, isDisabled);
+                            }
+                        }
+                    }
+                }
+            } catch (Exception e) {
+                Log.ERROR("Unable to toggle state for mods -> Enabled");
+                Log.ERROR(e, e.getMessage());
+                Log.DEBUG("Skipping procedure");
+            }
+        }
+    }
+
+    private void toggleModEnabledState(String modName, Boolean shouldEnable) throws Exception {
+        if (modName == null || shouldEnable == null) {
+            modName = table.getValueAt(table.getSelectedRow(), 1).toString();
+            toggleModEnabledState(modName, shouldEnable);
+        }
+
+        File disabledMods = new File(DISABLED_MODS_FOLDER_PATH);
+        File modFilesDir = new File(MODS_FOLDER_PATH);
+        if (modFilesDir.exists() && modFilesDir.isDirectory()
+                && disabledMods.exists() && disabledMods.isDirectory()) {
+            File match = null;
+            File[] modFiles = modFilesDir.listFiles();
+            if (modFiles != null && modFiles.length > 0) {
+                for (File modFile : modFiles) {     // Rename the file and change the path
+                    if (modFile.getCanonicalFile().getName().equals(modName)) {
+                        shouldEnable = false;
+                        match = modFile;
+                        break;
+                    }
+                }
+            }
+
+            File[] dMods = disabledMods.listFiles();
+            if (dMods != null && dMods.length > 0) {
+                for (File dMFile : dMods) {
+                    if (dMFile.getCanonicalFile().getName().equals(modName)) {
+                        shouldEnable = true;
+                        match = dMFile;
+                        break;
+                    }
+                }
+            }
+
+            if (match != null) {
+                boolean success = match.renameTo(
+                        new File(shouldEnable ?
+                                MODS_FOLDER_PATH + "/" + modName :
+                                DISABLED_MODS_FOLDER_PATH + "/" + modName
+                        )
+                );
+
+                if (! success) {
+                    throw new NullPointerException("Mods directory not found");
+                } else {
+                    Log.DEBUG("File path changed successfully");
+                }
+            } else {
+                throw new FileNotFoundException("Mod file not found");
+            }
+        }
+
+    }
+
     @Override
     public void fireTableDataChanged() {
         //super.fireTableDataChanged();
@@ -320,30 +499,32 @@ public class KSPMMTableModel extends KSPMMAbstractTableModel implements TableMod
     @Override
     public void fireTableCellUpdated(int row, int column) {
         Log.DEBUG("Updating cell at position (" + row + ", " + column + ")...");
-        String typeStr;
-        if (column == 0) {
-            typeStr = "Boolean";
-        } else {
-            typeStr = "String";
-        }
-
+        String typeStr = column == 0 ? Boolean.class.getName() : String.class.getName();
         Log.DEBUG("- Title: 'Enabled'");
         Log.DEBUG("- Type:  '" + typeStr + "'");
         Log.DEBUG("- Value: '" + getValueAt(row, column) + "'");
         Log.DEBUG("Cell updated successfully");
 
-        if (getValueAt(row, column) == Boolean.TRUE) {
-            // TODO move mod file into primary location
-        } else {
-            // TODO move mod into disabled folder
-        }
+        try {
+            Log.DEBUG("Toggling enabled state for mod with name \"" + table.getValueAt(row, 1) + "\"");
 
-        table.repaint();
+            if (column == 0) {
+                AsyncTask.execute(() -> {
+                    toggleModEnabledState(data[row][1].toString());
+                });
+            }
+
+            Log.DEBUG("File enabled state toggled successfully");
+        } catch (Exception e) {
+            Log.ERROR("Unable to edit enabled state for mod at the specified path");
+            Log.ERROR(e, e.getMessage());
+            Log.DEBUG("Skipping procedure");
+        }
     }
 
     @Override
     public void fireTableChanged(TableModelEvent e) {
-        fireTableCellUpdated(e.getFirstRow(), e.getColumn());
+        //fireTableCellUpdated(e.getFirstRow(), e.getColumn());
         super.fireTableChanged(e);
     }
 
@@ -355,7 +536,7 @@ public class KSPMMTableModel extends KSPMMAbstractTableModel implements TableMod
     @Override
     public void fireTableRowsInserted(int firstRow, int lastRow) {
         super.fireTableRowsInserted(firstRow, lastRow);
-        fireTableCellUpdated(table.getSelectedRow(), table.getSelectedColumn());
+        //fireTableCellUpdated(table.getSelectedRow(), table.getSelectedColumn());
     }
 
     @Override
@@ -366,7 +547,7 @@ public class KSPMMTableModel extends KSPMMAbstractTableModel implements TableMod
     @Override
     public void fireTableStructureChanged() {
         super.fireTableStructureChanged();
-        fireTableCellUpdated(table.getSelectedRow(), table.getSelectedColumn());
+        //fireTableCellUpdated(table.getSelectedRow(), table.getSelectedColumn());
     }
 
     @Override

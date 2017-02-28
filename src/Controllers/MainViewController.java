@@ -13,12 +13,11 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
 
 import static Constants.BoolConstants.IS_MAC;
 import static Constants.BoolConstants.IS_WINDOWS;
-import static Constants.StrConstants.*;
 import static Constants.StrConstants.Characters.SPACE;
+import static Constants.StrConstants.*;
 import static Constants.StrConstants.Messages.Debug.InitializationMsgs.GENERATE_TABLE_MODEL;
 import static javax.swing.SwingUtilities.updateComponentTreeUI;
 
@@ -100,15 +99,11 @@ public class MainViewController implements ActionListener, KeyListener {
 
     private void setActionListeners() {
         if (view != null && view.getMenuItems().size() > 0) {
-            ArrayList<JMenuItem> menuItems = new ArrayList<>();
             for (JComponent item : view.getMenuItems()) {
                 if (item.getClass().equals(JMenuItem.class)) {  // excludes JSeparator objects
-                    menuItems.add((JMenuItem) item);
+                    JMenuItem menuItem = ((JMenuItem) item);
+                    menuItem.addActionListener(this);
                 }
-            }
-
-            if (menuItems.size() > 0) {
-                for (JMenuItem menuItem : menuItems) menuItem.addActionListener(this);
             }
         }
     }
